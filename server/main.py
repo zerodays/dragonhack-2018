@@ -2,18 +2,24 @@ import image_helpers
 import requests
 import uuid
 from flask import Flask, request
+import recognition
 
 app = Flask(__name__)
 
 
 @app.route('/recognize', methods=['POST'])
 def recognize():
+<<<<<<< HEAD
     id = str(uuid.uuid4())
     filename = f'images/{id}.jpg'
 
     request.files['file'].save(filename)
 
     image = image_helpers.image_to_base64(filename)
+=======
+    # print(request.data)
+    image = image_helpers.image_to_base64('../sample_images/IMG_20180519_123749.jpg')
+>>>>>>> 3f19fb9fa60a07b54bd1fb99f6293604dc387d7c
 
     url = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'
     data = {
@@ -37,6 +43,13 @@ def recognize():
     }
 
     r = requests.post(url, json=data)
+<<<<<<< HEAD
+=======
+
+    print(recognition.get_price_from_text(r.json()))
+
+    return 'dummy string'
+>>>>>>> 3f19fb9fa60a07b54bd1fb99f6293604dc387d7c
 
     # r.json()
 
