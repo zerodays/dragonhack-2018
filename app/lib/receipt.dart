@@ -9,10 +9,10 @@ class _ReceiptState extends State<Receipt> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      padding: new EdgeInsets.symmetric(vertical: 64.0, horizontal: 12.0),
+      padding: new EdgeInsets.symmetric(vertical: 44.0, horizontal: 6.0),
       child: new Card(
         child: new Container(
-          width: MediaQuery.of(context).size.width - 140.0,
+          width: MediaQuery.of(context).size.width - 96.0,
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -69,7 +69,7 @@ class _ReceiptState extends State<Receipt> {
                 children: <Widget>[
                   new FlatButton(
                       onPressed: () => print('asdf'), // TODO: neki nared
-                      padding: new EdgeInsets.fromLTRB(2.0, 4.0, 2.0, 6.0),
+                      padding: new EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 6.0),
                       child: new Column(
                         children: <Widget>[
                           new Icon(
@@ -84,7 +84,7 @@ class _ReceiptState extends State<Receipt> {
                       )),
                   new FlatButton(
                       onPressed: () => print('asdf'), // TODO: neki nared
-                      padding: new EdgeInsets.fromLTRB(2.0, 4.0, 2.0, 6.0),
+                      padding: new EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 6.0),
                       child: new Column(
                         children: <Widget>[
                           new Icon(
@@ -99,7 +99,7 @@ class _ReceiptState extends State<Receipt> {
                       )),
                   new FlatButton(
                       onPressed: () => print('asdf'), // TODO: neki nared
-                      padding: new EdgeInsets.fromLTRB(2.0, 4.0, 2.0, 6.0),
+                      padding: new EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 6.0),
                       child: new Column(
                         children: <Widget>[
                           new Icon(
