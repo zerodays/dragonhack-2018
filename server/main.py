@@ -12,8 +12,8 @@ receipts_file = "receipts.txt"
 
 @app.route('/recognize', methods=['POST'])
 def recognize():
-    id = str(uuid.uuid4())
-    filename = f'images/{id}.jpg'
+    upload_id = str(uuid.uuid4())
+    filename = f'images/{upload_id}.jpg'
     request.files['file'].save(filename)
     picture= Image.open(filename)
     picture.rotate(-90).save(filename)
@@ -47,15 +47,13 @@ def recognize():
     '{:.2f}'.format(receipt_price)
     receipt_vendor = recognition.get_vendor_name_from_text(data)
 
-    # Get current time and generate a receipt ID (COPIED FROM ABOVE - REMOVE ONE OF THEM)
-    id = str(uuid.uuid4())
     curr_time = time.time()
 
     # Prepare the data for json
     json_data_raw = {
         'vendor': receipt_vendor,
         'price': receipt_price,
-        'id': id,
+        'id': upload_id,
         'time': curr_time,
     }
 
@@ -65,7 +63,6 @@ def recognize():
         with open(receipts_file, "w") as init_f:
             basic_json = {
                 'receipts': [],
-                'total': 0.00,
             }
             json.dump(basic_json, init_f)
 
@@ -74,16 +71,12 @@ def recognize():
         existing_json = json.loads(f.read())
         existing_json['receipts'].append(json_data_raw)
 
-        new_total = float('{:.2f}'.format(existing_json['total'] + receipt_price))
-
-        existing_json['total'] = new_total
-
     # Dump the new json into the file
     with open(receipts_file, "w") as f:
         json.dump(existing_json, f)
 
     # Return the json data
-    return str(existing_json)
+    return history()
 
 @app.route('/history')
 def history():
