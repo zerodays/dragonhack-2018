@@ -20,10 +20,33 @@ def get_price_from_text(dictionary):
         if '.' in text and ',' in text:
             continue
 
+        # Split text
         if '.' in text:
             splited = text.split('.')
         else:
             splited = text.split(',')
+
+        # Only one decimal separator will be in nunmber
+        if len(splited) != 2:
+            continue
+
+        # Assume price is always with 2 decimal numbers and max 4 full numbers
+        if len(splited[0]) > 4 or len(splited[1]) != 2:
+            continue
+
+
+        try:
+            whole = int(splited[0])
+            part = int(splited[1])
+        except:
+            continue
+
+        price = whole + part / 100
+
+        numbers.append((price, annotation))
+
+    print('\n'.join(map(str, numbers)))
+
 
 def get_vendor_name_from_text(dictionary):
     data = dictionary['responses'][0]['textAnnotations']
