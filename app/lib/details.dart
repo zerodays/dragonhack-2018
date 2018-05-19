@@ -24,7 +24,7 @@ class _DetailsState extends State<Details> {
               elevation: 4.0,
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(0.0)),
-              margin: new EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8.0),
+              margin: new EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
               child: new Container(
                 padding: new EdgeInsets.all(16.0),
                 child: new Row(

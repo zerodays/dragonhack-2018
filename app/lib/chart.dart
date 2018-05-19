@@ -17,7 +17,7 @@ class _ChartState extends State<Chart> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              height: 109.0,
+              height: 100.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -78,7 +78,7 @@ class _ChartState extends State<Chart> {
                 edgeStyle: SegmentEdgeStyle.round,
                 percentageValues: false),
             new Container(
-              height: 109.0,
+              height: 100.0,
             ),
           ],
         ),
