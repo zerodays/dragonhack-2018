@@ -21,7 +21,12 @@ def recognize():
                     {
                         'type': 'TEXT_DETECTION',
                     },
-                ]
+                ],
+                'imageContext': {
+                    'languageHints': [
+                        'sl'
+                    ]
+                }
             }
         ]
     }
