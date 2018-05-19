@@ -85,7 +85,6 @@ def upload_test():
             json.dump(basic_json, init_f)
 
     # Read the old data from the file and modify the json
-
     with open(receipts_file, "r") as f:
         existing_json = json.loads(f.read())
         existing_json['receipts'].append(json_data_raw)
@@ -95,7 +94,6 @@ def upload_test():
         existing_json['total'] = new_total
 
     # Dump the new json into the file
-
     with open(receipts_file, "w") as f:
         json.dump(existing_json, f)
 
