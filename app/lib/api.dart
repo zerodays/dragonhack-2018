@@ -28,7 +28,7 @@ Future<Null> uploadImage(String fileName) async {
   print('request prepared');
 
   var response = await request.send();
-  print(response.statusCode);
+
   response.stream.transform(utf8.decoder).listen((value) {
     print(value);
   });
@@ -47,10 +47,17 @@ getRequest(Uri uri, {decodeJson: true}) async {
 
 
 Future<List<Receipt>> getScannedReciepts() async {
-  Map data = await getRequest(new Uri.https(serverIp, 'history/'));
+  Map data = await getRequest(Uri.parse(serverIp + '/history'));  
   
-  totalPrice = data['total'];
+  totalPrice = data['total'].toString();
 
-  return data['receipts'].cast<Map<String, dynamic>>();
+  List<Map> d = data['receipts'].cast<Map>();
+  
+  var dd = d.map(
+    (Map map) => new Receipt(map)
+  ).toList();
+
+  print(dd);
+  return dd;
 }
 

@@ -16,7 +16,7 @@ class _ReceiptState extends State<Receipt> {
   Widget build(BuildContext context) {
     String vendor = widget.receipt['vendor'];
     String id = widget.receipt['id'];
-    String price = widget.receipt['price'];
+    double price = widget.receipt['price'];
     String datetime = formatDate(widget.receipt['time']);
     // TODO reciept image...
 
@@ -35,7 +35,7 @@ class _ReceiptState extends State<Receipt> {
                     padding: new EdgeInsets.only(top: 8.0, right: 16.0, left: 16.0),
                     child: new Row(
                       children: <Widget>[
-                        new Text('Thu, 3. Mar 2017, 14:32',
+                        new Text(datetime,
                           style: new TextStyle(fontSize: 12.0, color: Colors.grey[600]),
                         ),
                       ],
@@ -52,7 +52,8 @@ class _ReceiptState extends State<Receipt> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        new Text(price,
+                        new Text(
+                          new NumberFormat('###.##').format(price),
                           style: new TextStyle(fontSize: 36.0),
                         ),
                         new Container(
@@ -133,7 +134,7 @@ class _ReceiptState extends State<Receipt> {
   }
 }
 
-String formatDate(String timestamp) {
-  var datetime = DateTime.fromMillisecondsSinceEpoch(1000 * int.parse(timestamp));
+String formatDate(double timestamp) {
+  var datetime = DateTime.fromMillisecondsSinceEpoch(1000 * timestamp.toInt());
   return new DateFormat('E d. MMM').format(datetime);
 }
