@@ -21,17 +21,7 @@ class _StatsState extends State<Stats> {
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: new Container(
-          padding: new EdgeInsets.all(16.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Chart(),
-              new Container(
-                height: 80.0,
-              )
-            ],
-          ),
-        ));
+        body: new Chart()
+    );
   }
 }

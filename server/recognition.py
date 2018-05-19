@@ -1,5 +1,6 @@
 import difflib
 import json
+from collections import defaultdict
 
 
 def get_price_from_text(dictionary):
@@ -19,8 +20,8 @@ def get_price_from_text(dictionary):
 
     eur_labels = []
     for annotation in data:
-        text = annotation['description']
-        if text != 'EUR':
+        text = annotation['description'].replace(' ', '')
+        if 'EUR' not in text:
             continue
 
         vertices = annotation['boundingPoly']['vertices']
@@ -29,9 +30,11 @@ def get_price_from_text(dictionary):
 
         eur_labels.append((absolute_x - min_x, absolute_y - min_y))
 
+    occurances = defaultdict(int)
+
     numbers = []
     for annotation in data:
-        text = annotation['description']
+        text = annotation['description'].replace(' ', '')
 
         # Price contains decimal separator
         if '.' not in text and ',' not in text:
@@ -64,6 +67,11 @@ def get_price_from_text(dictionary):
 
         price = whole + part / 100
 
+        if price == 0:
+            continue
+
+        occurances[price] += 1
+
         # Get position
         vertices = annotation['boundingPoly']['vertices']
         absolute_x = min(map(lambda x: x['x'], vertices))
@@ -95,8 +103,8 @@ def get_price_from_text(dictionary):
 
         res = {
             'price': price,
-            'score_x': relative_x,
-            'score_y': relative_y * 2,
+            'score_x': relative_x * 1.5,
+            'score_y': relative_y * 1.2,
             'score_eur_x': max(distances_y),
             'score_eur_y': max(distances_y),
             'score_height': height,
@@ -108,21 +116,23 @@ def get_price_from_text(dictionary):
     max_price = max(map(lambda x: x['price'], numbers))
     max_y_distance = max(map(lambda x: x['score_eur_y'], numbers)) ** 2
     max_height = max(map(lambda x: x['score_height'], numbers))
+    max_occurances = max(occurances.values())
     for d in numbers:
-        d['score_price'] = (d['price'] / max_price) * 0.3
+        d['score_price'] = (d['price'] / max_price) * 0.2
 
         d['score_eur_y'] **= 2
         d['score_eur_y'] /= max_y_distance
 
         d['score_height'] /= max_height
+        d['score_height'] *= 1.3
+        d['score_occurances'] = occurances[d['price']] / max_occurances
 
     # Calculate final score
     for d in numbers:
-        d['score'] = d['score_x'] + d['score_y'] +  d['score_eur_x'] + d['score_eur_y'] + d['score_height'] + d['score_price']
+        d['score'] = d['score_x'] + d['score_y'] +  d['score_eur_x'] + d['score_eur_y'] + d['score_height'] + d['score_price'] + d['score_occurances']
 
 
     numbers.sort(key=lambda x: x['score'], reverse=True)
-    print('\n'.join(map(str, numbers)))
 
     return numbers[0]['price']
 
@@ -139,14 +149,15 @@ def get_vendor_name_from_text(dictionary):
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
         data1_possible_vendors = []
-        possible_strings += [j + " d.o.o." for j in
-                             possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        temp_possible_strings = [l for l in possible_strings]
+        possible_strings += [j + " d.o.o." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        possible_strings += [j + " d.d." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         for i in data:  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
             if possibilities:
                 data1_possible_vendors += possibilities
-        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in data1_possible_vendors))
+        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.").rstrip(" d.d.").rstrip("d.d.") for w in data1_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")  # Get the actual receipt text

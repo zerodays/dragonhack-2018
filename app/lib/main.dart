@@ -19,10 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Receipts',
       theme: new ThemeData(
         primarySwatch: Colors.cyan,
-        accentColor: Colors.tealAccent[400]
+        accentColor: Colors.tealAccent[400],
+        fontFamily: 'OnePlusSlate',
       ),
       home: new MainPage(),
     );
@@ -39,7 +40,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Ime tripa na kerem sm'),
+        title: new Text('Receipts'),
+        centerTitle: true,
       ),
       body: new PageView(scrollDirection: Axis.vertical, children: [
         new Stats(),
