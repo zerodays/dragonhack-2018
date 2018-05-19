@@ -149,14 +149,15 @@ def get_vendor_name_from_text(dictionary):
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
         data1_possible_vendors = []
-        possible_strings += [j + " d.o.o." for j in
-                             possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        temp_possible_strings = [l for l in possible_strings]
+        possible_strings += [j + " d.o.o." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        possible_strings += [j + " d.d." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         for i in data:  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
             if possibilities:
                 data1_possible_vendors += possibilities
-        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in data1_possible_vendors))
+        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.").rstrip(" d.d.").rstrip("d.d.") for w in data1_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")  # Get the actual receipt text
