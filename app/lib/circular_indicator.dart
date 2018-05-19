@@ -17,8 +17,8 @@ class _IndicatorState extends State<CircularInidicator> {
   Future<Null> callFunction() async {
     try {
       await widget.function();
-    } on SocketException {
-      print('Error internet disconnected');
+    } on SocketException catch (e) {
+      print(e.toString());
     } on FormatException catch (e) {
       print(e.toString());
     }

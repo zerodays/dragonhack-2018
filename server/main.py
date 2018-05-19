@@ -32,7 +32,7 @@ def recognize():
     }
 
     r = requests.post(url, json=data)
-    print(r.json())
+    # print(r.json())
     return request.data
 
 
