@@ -37,8 +37,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> alreadyScanned = getAlreadyScanned();
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Ime tripa na kerem sm'),
@@ -73,14 +71,5 @@ class _MainPageState extends State<MainPage> {
         ),
       ), // to-formatting nicer for build methods.
     );
-  }
-
-  // TODO: download data, probably async?
-  List<ListTile> getAlreadyScanned() {
-    return [
-      new ListTile(
-        title: new Text('Mercator, 4.26€'),
-      )
-    ];
   }
 }

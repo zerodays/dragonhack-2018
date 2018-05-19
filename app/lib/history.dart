@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'receipt.dart';
+import 'api.dart';
 
 class History extends StatefulWidget {
   @override
@@ -7,6 +9,22 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  List<Receipt> receipts;
+
+  @override
+  void initState() {
+    receipts = [];
+    getReceipts();
+    super.initState();
+  }
+
+  Future<void> getReceipts() async {
+    var rec = await getScannedReciepts();
+    setState(() {
+      receipts = rec;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -24,17 +42,7 @@ class _HistoryState extends State<History> {
               padding: new EdgeInsets.only(left: 16.0),
               // This next line does the trick.
               scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-                new Receipt(),
-              ],
+              children: receipts
             )));
   }
 }

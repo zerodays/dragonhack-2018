@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'image_view.dart';
 
 class Receipt extends StatefulWidget {
+  final Map receipt;
+
+  Receipt(this.receipt);
+
   @override
   _ReceiptState createState() => new _ReceiptState();
 }
@@ -9,6 +14,12 @@ class Receipt extends StatefulWidget {
 class _ReceiptState extends State<Receipt> {
   @override
   Widget build(BuildContext context) {
+    String vendor = widget.receipt['vendor'];
+    String id = widget.receipt['id'];
+    String price = widget.receipt['price'];
+    String datetime = formatDate(widget.receipt['time']);
+    // TODO reciept image...
+
     return new Container(
       padding: new EdgeInsets.symmetric(vertical: 44.0, horizontal: 6.0),
       child: new Card(
@@ -41,7 +52,7 @@ class _ReceiptState extends State<Receipt> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        new Text('3.54 ',
+                        new Text(price,
                           style: new TextStyle(fontSize: 36.0),
                         ),
                         new Container(
@@ -57,7 +68,7 @@ class _ReceiptState extends State<Receipt> {
                       children: <Widget>[
                         new Container(
                           padding: new EdgeInsets.only(top: 12.0),
-                          child: new Text('Mercator'),
+                          child: new Text(vendor),
                         )
                       ],
                     ),
@@ -120,4 +131,9 @@ class _ReceiptState extends State<Receipt> {
       ),
     );
   }
+}
+
+String formatDate(String timestamp) {
+  var datetime = DateTime.fromMillisecondsSinceEpoch(1000 * int.parse(timestamp));
+  return new DateFormat('E d. MMM').format(datetime);
 }
