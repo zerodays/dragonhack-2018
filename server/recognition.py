@@ -180,6 +180,10 @@ def get_vendor_name_from_text(dictionary):
                 out = possible_vendors[0]
             else:
                 out = list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
+
+    if not out:
+        out = receipt_text[0]
+
     else:
         if "," in receipt_text[0]:
             out = receipt_text[0].split(",")[0]
@@ -187,6 +191,12 @@ def get_vendor_name_from_text(dictionary):
             out = ((receipt_text[0].split("d.o.o."))[0]).rstrip(" ")
         elif "d.d." in receipt_text[0]:
             out = ((receipt_text[0].split("d.d."))[0]).rstrip(" ")
+
+    check_again = is_close(out, vendors, 0.85)
+    if check_again:
+        out = check_again[0]
+    else:
+        pass
     return out.capitalize()
 
 
