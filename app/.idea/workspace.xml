@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b59a467-2555-4988-be32-e47c7d2b358c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lib/chart.dart" afterPath="$PROJECT_DIR$/lib/chart.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/details.dart" afterPath="$PROJECT_DIR$/lib/details.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -68,8 +65,8 @@
       <file leaf-file-name="chart.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/chart.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="80" column="25" lean-forward="false" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+            <state relative-caret-position="247">
+              <caret line="97" column="37" lean-forward="false" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -517,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526773197538</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="minor fixes">
+      <created>1526773504222</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1526773504222</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -595,7 +599,8 @@
     <MESSAGE value="add multiple months" />
     <MESSAGE value="add some details" />
     <MESSAGE value="add hero" />
-    <option name="LAST_COMMIT_MESSAGE" value="add hero" />
+    <MESSAGE value="minor fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -955,8 +960,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/chart.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="80" column="25" lean-forward="false" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
+        <state relative-caret-position="247">
+          <caret line="97" column="37" lean-forward="false" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
           <folding />
         </state>
       </provider>
