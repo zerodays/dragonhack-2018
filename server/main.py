@@ -81,7 +81,11 @@ def recognize():
 @app.route('/history')
 def history():
     with open(receipts_file, 'r') as f:
-        return f.read()
+        data = json.loads(f.read())
+    
+    data['receipts'] = data['receipts'][:30]
+
+    return json.dumps(data)
 
 @app.route('/<path:filename>')
 def server_image(filename):
