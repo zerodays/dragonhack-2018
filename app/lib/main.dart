@@ -54,7 +54,14 @@ class _MainPageState extends State<MainPage> {
         child: new RaisedButton(
           color: Theme.of(context).accentColor,
           onPressed: () => Navigator.of(context).push(
-            new MaterialPageRoute(builder: (context) => new CameraView()),
+            new PageRouteBuilder(
+              pageBuilder: (BuildContext context, Animation _, Animation __) => new CameraView(),
+              transitionsBuilder: (BuildContext context, Animation<double> animation,
+                Animation _, Widget child) => new FadeTransition(
+                    opacity: animation,
+                    child: child
+                )
+            ),
           ),
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(24.0)),

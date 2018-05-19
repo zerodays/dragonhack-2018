@@ -19,8 +19,8 @@ class _ReceiptState extends State<Receipt> {
     String id = widget.receipt['id'];
     double price = widget.receipt['price'];
     String datetime = formatDate(widget.receipt['time']);
-    double lat = widget.receipt['lat'];
-    double lon = widget.receipt['lon'];
+    String lat = widget.receipt['lat'];
+    String lon = widget.receipt['lon'];
 
     return new Container(
       padding: new EdgeInsets.symmetric(vertical: 44.0, horizontal: 6.0),
@@ -148,8 +148,8 @@ class _ReceiptState extends State<Receipt> {
   }
 }
 
-String getMapUrl(double lat, double lon) {
-  return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat, $lon&zoom=18&size=400x260&maptype=roadmap&markers=color:red%7Clabel:C%46.056896,14.505871&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE';
+String getMapUrl(String lat, String lon) {
+  return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat, $lon&zoom=18&size=400x260&maptype=roadmap&markers=color:red%$lat, $lon&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE';
 }
 
 String formatDate(double timestamp) {
