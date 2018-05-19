@@ -23,3 +23,11 @@ pip install -r requirements.txt
 
 
 
+## Tesseract
+
+Install the main program and language packs
+```
+sudo apt install tesseract-ocr
+sudo apt install libtesseract-dev
+sudo apt install tesseract-ocr
+```
