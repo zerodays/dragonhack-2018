@@ -33,8 +33,24 @@ class _IndicatorState extends State<CircularInidicator> {
   
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: new CircularProgressIndicator(),
+    print(Theme.of(context));
+    return new Container(
+      color: Colors.white,
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Container(
+            width: 200.0,
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Image.asset('assets/cloud_load.gif'),
+                new Text('Processing in the cloud ...', textAlign: TextAlign.center, style: new TextStyle(inherit: true, fontSize: 18.0, color: Colors.grey[800], fontWeight: FontWeight.normal))
+              ],
+            )
+          )
+        ],
+      )
     );
   }
 }
