@@ -72,7 +72,9 @@ class _MainPageState extends State<MainPage> {
         padding: new EdgeInsets.only(left: 132.0, right: 132.0, bottom: 22.0),
         child: new RaisedButton(
           color: Theme.of(context).accentColor,
-          onPressed: () => print('neki'),
+          onPressed: () => Navigator.of(context).push(
+            new MaterialPageRoute(builder: (context) => new CameraView()),
+          ),
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(20.0)),
           child: new Row(
