@@ -60,7 +60,8 @@ def get_vendor_name_from_text(dictionary):
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
         temp_possible_vendors = []
-        possible_strings += [j + " d.o.o." for j in possible_strings]
+        possible_strings += [j + " d.o.o." for j in
+                             possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         for i in data:  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
@@ -69,10 +70,11 @@ def get_vendor_name_from_text(dictionary):
         return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in temp_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
-    receipt_text = data[0]['description'].split("\n")
+    receipt_text = data[0]['description'].split("\n")  # Get the actual receipt text
 
-    vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda", "dijaški dom vič"]
-    possible_vendors = is_close(receipt_text[:20], vendors, 0.8)
+    vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda",
+               "dijaški dom vič"]
+    possible_vendors = is_close(receipt_text[:20], vendors, 0.8)  # Get the possible vendors
 
     possible_vendors = list(set(possible_vendors))
     if len(possible_vendors) == 1:  # If only one vendor is found, return it
@@ -81,11 +83,11 @@ def get_vendor_name_from_text(dictionary):
         possible_vendors = list(set(is_close(receipt_text[:20], vendors, 1)))
         if possible_vendors:
             return possible_vendors[0]
-        else:
+        else:  # If suddenly no vendors are found anymore
             possible_vendors = list(set(is_close(receipt_text[:20], vendors, 0.95)))
             if possible_vendors:
                 return possible_vendors[0]
-            return list(set(is_close(receipt_text[:20], vendors, 1)))[0]
+            return list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
     else:
         return receipt_text[0]
 
