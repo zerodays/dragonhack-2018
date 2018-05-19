@@ -6,6 +6,7 @@ import recognition
 import json
 import time
 from PIL import Image
+import datetime
 
 app = Flask(__name__)
 receipts_file = "receipts.txt"
@@ -82,10 +83,71 @@ def recognize():
 def history():
     with open(receipts_file, 'r') as f:
         data = json.loads(f.read())
-    
+
     data['receipts'] = data['receipts'][:30]
 
     return json.dumps(data)
+
+
+vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda", "dijaški dom vič"]
+vendors = list(map(lambda x: x.capitalize(), vendors))
+
+months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+@app.route('/statistics')
+def statistics():
+    with open(receipts_file, 'r') as f:
+        data = json.loads(f.read())
+
+    data = data['receipts']
+
+    stats = dict()
+    for d in data:
+        date = datetime.date.fromtimestamp(int(d['time']))
+        if (date.year, date.month) not in stats:
+            vendors_dict = dict()
+            for vendor in vendors:
+                vendors_dict[vendor] = 0.0
+            vendors_dict['Others'] = 0.0
+
+            weekdays_dict = dict()
+            for i in range(7):
+                weekdays_dict[str(i)] = 0.0
+
+            stats[(date.year, date.month)] = {
+                'total': 0.0,
+                'vendors': vendors_dict,
+                'weekdays': weekdays_dict,
+            }
+
+        stats[(date.year, date.month)]['total'] += d['price']
+        if d['vendor'] in vendors:
+            stats[(date.year, date.month)]['vendors'][d['vendor']] += d['price']
+        else:
+            stats[(date.year, date.month)]['vendors']['Others'] += d['price']
+        stats[(date.year, date.month)]['weekdays'][str(date.weekday())] += d['price']
+
+        keys = list(stats.keys())
+        keys.sort(reverse=True)
+
+        res = []
+        for key in keys:
+            res.append({
+                'total': round(stats[key]['total'], 2),
+                'vendors': stats[key]['vendors'],
+                'weekdays': stats[key]['weekdays'],
+                'year': key[0],
+                'month': months[key[1] - 1],
+            })
+
+        for r in res:
+            for key in r['vendors'].keys():
+                r['vendors'][key] = round(r['vendors'][key], 2)
+            for key in r['weekdays'].keys():
+                r['weekdays'][key] = round(r['weekdays'][key], 2)
+
+
+    return json.dumps({'statistics': res})
 
 @app.route('/<path:filename>')
 def server_image(filename):
