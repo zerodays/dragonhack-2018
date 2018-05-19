@@ -49,16 +49,24 @@ def get_price_from_text(dictionary):
 
 
 def get_vendor_name_from_text(dictionary):
+    def is_close(orig_string, possible_strings, diff):
+        return difflib.get_close_matches(orig_string, possible_strings, cutoff=diff)
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")
-    vendors = ["spar", "deichmann", "mercator", "lidl", "tus", "hofer", "interspar"]
+    vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", ""]
     possible_vendors = []
-    for i in receipt_text[:10]:
+    for i in receipt_text[:20]:
         i = i.lower()
-        possibilities = difflib.get_close_matches(i, vendors, cutoff=0.8)
+        possibilities = is_close(i.lower(), vendors, 0.8)
         if possibilities:
             possible_vendors += possibilities
-    return possible_vendors
+    if len(possible_vendors) == 1:
+        return possible_vendors[0]
+    elif len(possible_vendors) > 0:
+        possible_vendors = is_close(i.lower(), vendors, 1)
+        return possible_vendors[0]
+    else:
+        return receipt_text[0]
 
 if __name__ == '__main__':
     get_price_from_text(temp)
