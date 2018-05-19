@@ -26,7 +26,9 @@ class _ChartState extends State<Chart> {
                     children: <Widget>[
                       new Text('May', style: TextStyle(fontSize: 22.0)),
                       new Container(width: 8.0),
-                      new Text('2018', style: TextStyle(fontSize: 22.0, color: Colors.grey[400])),
+                      new Text('2018',
+                          style: TextStyle(
+                              fontSize: 22.0, color: Colors.grey[400])),
                     ],
                   ),
                   new Wrap(
@@ -36,27 +38,32 @@ class _ChartState extends State<Chart> {
                     children: <Widget>[
                       new Chip(
                         backgroundColor: Colors.transparent,
-                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[100]),
+                        avatar: new Icon(Icons.brightness_1,
+                            size: 18.0, color: Colors.cyan[100]),
                         label: new Text('Mercator'),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
-                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[300]),
+                        avatar: new Icon(Icons.brightness_1,
+                            size: 18.0, color: Colors.cyan[300]),
                         label: new Text('InterSpar'),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
-                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[600]),
+                        avatar: new Icon(Icons.brightness_1,
+                            size: 18.0, color: Colors.cyan[600]),
                         label: new Text('Lidl'),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
-                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.teal[200]),
+                        avatar: new Icon(Icons.brightness_1,
+                            size: 18.0, color: Colors.teal[200]),
                         label: new Text('Deichman'),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
-                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.tealAccent[100]),
+                        avatar: new Icon(Icons.brightness_1,
+                            size: 18.0, color: Colors.tealAccent[100]),
                         label: new Text('Other'),
                       )
                     ],
@@ -77,8 +84,8 @@ class _ChartState extends State<Chart> {
         ),
         new FlatButton(
           onPressed: () => Navigator.of(context).push(
-            new MaterialPageRoute(builder: (context) => new Details()),
-          ), //TODO
+                new MaterialPageRoute(builder: (context) => new Details()),
+              ), //TODO
 //            splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           child: new Container(
@@ -88,27 +95,36 @@ class _ChartState extends State<Chart> {
               children: <Widget>[
                 new Column(
                   children: <Widget>[
-                    new Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        new Text(
-                          '3.54 ', // TODO: tole mora bit hero na novo stran
-                          style: new TextStyle(
-                              fontSize: 36.0, fontWeight: FontWeight.normal),
-                        ),
-                        new Container(
-                          padding: new EdgeInsets.only(left: 8.0, bottom: 2.0),
-                          child: new Text(
-                            '€',
-                            style: new TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.grey[500],
-                                fontWeight: FontWeight.normal),
+                    new Hero(
+                        tag: 'tag',
+                        //TODO: tale tag mora bit za usak mesec drgacn
+                        child: new Material(
+                          color: Colors.transparent,
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              new Text(
+                                '3.54 ',
+                                // TODO: tole mora bit hero na novo stran
+                                style: new TextStyle(
+                                    fontSize: 46.0,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              new Container(
+                                padding:
+                                    new EdgeInsets.only(left: 8.0, bottom: 2.0),
+                                child: new Text(
+                                  '€',
+                                  style: new TextStyle(
+                                      fontSize: 24.0,
+                                      color: Colors.grey[500],
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
+                        )),
                     new Text(
                       'Tap for more',
                       style: new TextStyle(
