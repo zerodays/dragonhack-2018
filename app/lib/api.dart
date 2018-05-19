@@ -5,18 +5,32 @@ import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
 import 'receipt.dart';
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 
 const String serverIp = 'http://46.101.179.230:8080';
 
-String totalPrice = '0.00';
+var location = new Location();
 
 Future<Null> uploadImage(String fileName) async {
+  // find user location
+  Map<String, double> loc;
+  try {
+    loc = await location.getLocation;
+  } on PlatformException {
+    print('get location failed');
+    loc = null;
+  }
+
+  String lat = loc["latitude"].toString() ?? 46.050163.toString();
+  String lon = loc["longitude"].toString() ?? 14.468868.toString();
+
   File imageFile = new File(fileName);
 
   var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
   var length = await imageFile.length();
 
-  var uri = Uri.parse(serverIp + '/recognize');
+  var uri = Uri.parse(serverIp + '/recognize?lat=$lat&lon=$lon');
   print('uri parsed');
 
   var request = new http.MultipartRequest('POST', uri);
@@ -49,15 +63,11 @@ getRequest(Uri uri, {decodeJson: true}) async {
 Future<List<Receipt>> getScannedReciepts() async {
   Map data = await getRequest(Uri.parse(serverIp + '/history'));  
   
-  totalPrice = data['total'].toString();
-
   List<Map> d = data['receipts'].cast<Map>();
   
   var dd = d.map(
     (Map map) => new Receipt(map)
-  ).toList();
-
-  print(dd);
+  ).toList().reversed.toList();
   return dd;
 }
 

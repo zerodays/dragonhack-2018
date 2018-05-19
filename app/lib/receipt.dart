@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'image_view.dart';
+import 'receipt_view.dart';
 
 class Receipt extends StatefulWidget {
   final Map receipt;
@@ -18,7 +19,8 @@ class _ReceiptState extends State<Receipt> {
     String id = widget.receipt['id'];
     double price = widget.receipt['price'];
     String datetime = formatDate(widget.receipt['time']);
-    // TODO reciept image...
+    double lat = widget.receipt['lat'];
+    double lon = widget.receipt['lon'];
 
     return new Container(
       padding: new EdgeInsets.symmetric(vertical: 44.0, horizontal: 6.0),
@@ -30,7 +32,7 @@ class _ReceiptState extends State<Receipt> {
             children: <Widget>[
               new Column(
                 children: <Widget>[
-                  new ImageView.singleImage('https://maps.googleapis.com/maps/api/staticmap?center=Ljubljana&zoom=18&size=400x260&maptype=roadmap&markers=color:red%7Clabel:C%46.056896,14.505871&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'),
+                  new ImageView.singleImage(getMapUrl(lat, lon)),
                   new Container(
                     padding: new EdgeInsets.only(top: 8.0, right: 16.0, left: 16.0),
                     child: new Row(
@@ -53,7 +55,10 @@ class _ReceiptState extends State<Receipt> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         new Text(
-                          new NumberFormat('###.##').format(price),
+                          new NumberFormat.currency(
+                            locale: 'en',
+                            symbol: ''
+                          ).format(price),
                           style: new TextStyle(fontSize: 36.0),
                         ),
                         new Container(
@@ -80,7 +85,16 @@ class _ReceiptState extends State<Receipt> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   new FlatButton(
-                      onPressed: () => print('asdf'), // TODO: neki nared
+                      onPressed: () => Navigator.of(context).push(
+                        new PageRouteBuilder(
+                          pageBuilder: (BuildContext context, Animation _, Animation __) => new ReceiptView(id),
+                          transitionsBuilder: (BuildContext context, Animation<double> animation,
+                            Animation _, Widget child) => new FadeTransition(
+                                opacity: animation,
+                                child: child
+                            )
+                        )
+                      ),
                       padding: new EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 6.0),
                       child: new Column(
                         children: <Widget>[
@@ -132,6 +146,10 @@ class _ReceiptState extends State<Receipt> {
       ),
     );
   }
+}
+
+String getMapUrl(double lat, double lon) {
+  return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat, $lon&zoom=18&size=400x260&maptype=roadmap&markers=color:red%7Clabel:C%46.056896,14.505871&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE';
 }
 
 String formatDate(double timestamp) {
