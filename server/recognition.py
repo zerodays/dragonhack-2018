@@ -18,8 +18,6 @@ def get_price_from_text(dictionary):
     min_y = min(map(lambda x: x['y'], main_vertices))
     max_y = max(map(lambda x: x['y'], main_vertices))
 
-    print(main_vertices)
-
     eur_labels = []
     for annotation in data:
         text = annotation['description'].replace(' ', '')
@@ -135,7 +133,6 @@ def get_price_from_text(dictionary):
 
 
     numbers.sort(key=lambda x: x['score'], reverse=True)
-    print('\n'.join(map(str, numbers)))
 
     return numbers[0]['price']
 
