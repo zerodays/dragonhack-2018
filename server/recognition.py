@@ -60,29 +60,36 @@ def get_vendor_name_from_text(dictionary):
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
         temp_possible_vendors = []
+        possible_strings += [j + " d.o.o." for j in possible_strings]
         for i in data:  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
             if possibilities:
                 temp_possible_vendors += possibilities
-        return temp_possible_vendors
+        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in temp_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")
 
-    vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin"]
+    vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda", "dijaški dom vič"]
     possible_vendors = is_close(receipt_text[:20], vendors, 0.8)
 
-    possible_vendors = list(possible_vendors)
+    possible_vendors = list(set(possible_vendors))
     if len(possible_vendors) == 1:  # If only one vendor is found, return it
         return possible_vendors[0]
-    elif len(possible_vendors) > 0:  # If there is more than one vendor found
-        possible_vendors = is_close(receipt_text[:20], vendors, 1)
-        return possible_vendors[0]
+    elif len(possible_vendors) > 0:  # If there is more than one vendor found, narrow down the search
+        possible_vendors = list(set(is_close(receipt_text[:20], vendors, 1)))
+        if possible_vendors:
+            return possible_vendors[0]
+        else:
+            possible_vendors = list(set(is_close(receipt_text[:20], vendors, 0.95)))
+            if possible_vendors:
+                return possible_vendors[0]
+            return list(set(is_close(receipt_text[:20], vendors, 1)))[0]
     else:
         return receipt_text[0]
 
 
 if __name__ == '__main__':
-    get_price_from_text(temp)
-    get_vendor_name_from_text(temp)
+    # get_price_from_text(temp)
+    print(get_vendor_name_from_text(temp))
