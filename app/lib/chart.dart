@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'details.dart';
 
 class Chart extends StatefulWidget {
   @override
@@ -16,54 +17,68 @@ class _ChartState extends State<Chart> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              height: 100.0,
-              child: new Wrap(
-                spacing: 8.0, // gap between adjacent chips
-                runSpacing: 4.0, // gap between lines
-                alignment: WrapAlignment.center,
+              height: 120.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  new Chip(
-                    backgroundColor: Colors.transparent,
-                    avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[100]),
-                    label: new Text('Mercator'),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text('May', style: TextStyle(fontSize: 22.0)),
+                      new Container(width: 8.0),
+                      new Text('2018', style: TextStyle(fontSize: 22.0, color: Colors.grey[400])),
+                    ],
                   ),
-                  new Chip(
-                    backgroundColor: Colors.transparent,
-                    avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[300]),
-                    label: new Text('InterSpar'),
-                  ),
-                  new Chip(
-                    backgroundColor: Colors.transparent,
-                    avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[600]),
-                    label: new Text('Lidl'),
-                  ),
-                  new Chip(
-                    backgroundColor: Colors.transparent,
-                    avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.teal[200]),
-                    label: new Text('Deichman'),
-                  ),
-                  new Chip(
-                    backgroundColor: Colors.transparent,
-                    avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.tealAccent[100]),
-                    label: new Text('Other'),
+                  new Wrap(
+                    spacing: 8.0, // gap between adjacent chips
+                    runSpacing: 4.0, // gap between lines
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      new Chip(
+                        backgroundColor: Colors.transparent,
+                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[100]),
+                        label: new Text('Mercator'),
+                      ),
+                      new Chip(
+                        backgroundColor: Colors.transparent,
+                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[300]),
+                        label: new Text('InterSpar'),
+                      ),
+                      new Chip(
+                        backgroundColor: Colors.transparent,
+                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.cyan[600]),
+                        label: new Text('Lidl'),
+                      ),
+                      new Chip(
+                        backgroundColor: Colors.transparent,
+                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.teal[200]),
+                        label: new Text('Deichman'),
+                      ),
+                      new Chip(
+                        backgroundColor: Colors.transparent,
+                        avatar: new Icon(Icons.brightness_1, size: 18.0, color: Colors.tealAccent[100]),
+                        label: new Text('Other'),
+                      )
+                    ],
                   )
                 ],
               ),
             ),
             new AnimatedCircularChart(
-                key: _chartKey,
                 size: const Size(300.0, 300.0),
                 initialChartData: data,
                 chartType: CircularChartType.Radial,
                 edgeStyle: SegmentEdgeStyle.round,
                 percentageValues: false),
             new Container(
-              height: 100.0,
+              height: 120.0,
             ),
           ],
         ),
         new FlatButton(
-          onPressed: () => print('asdf'), //TODO
+          onPressed: () => Navigator.of(context).push(
+            new MaterialPageRoute(builder: (context) => new Details()),
+          ), //TODO
 //            splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           child: new Container(
@@ -95,7 +110,7 @@ class _ChartState extends State<Chart> {
                       ],
                     ),
                     new Text(
-                      'Tap for more.',
+                      'Tap for more',
                       style: new TextStyle(
                           color: Colors.grey[500],
                           fontWeight: FontWeight.normal),
@@ -111,8 +126,6 @@ class _ChartState extends State<Chart> {
   }
 }
 
-final GlobalKey<AnimatedCircularChartState> _chartKey =
-    new GlobalKey<AnimatedCircularChartState>();
 List<CircularStackEntry> data = <CircularStackEntry>[
   new CircularStackEntry(
     <CircularSegmentEntry>[

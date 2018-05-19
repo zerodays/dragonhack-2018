@@ -5,6 +5,7 @@ import 'chart.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class Stats extends StatefulWidget {
+
   @override
   _StatsState createState() => new _StatsState();
 }
@@ -21,7 +22,12 @@ class _StatsState extends State<Stats> {
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: new Chart()
+        body: new PageView(scrollDirection: Axis.horizontal, children: [
+          new Chart(),
+          new Chart(),
+          new Chart(),
+          new Chart(),
+        ])
     );
   }
 }
