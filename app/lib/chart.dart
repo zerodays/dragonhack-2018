@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
+import 'tmp.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class Chart extends StatefulWidget {

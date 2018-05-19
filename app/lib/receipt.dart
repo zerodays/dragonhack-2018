@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'image_view.dart';
 
 class Receipt extends StatefulWidget {
   @override
@@ -18,8 +19,7 @@ class _ReceiptState extends State<Receipt> {
             children: <Widget>[
               new Column(
                 children: <Widget>[
-                  new Image.network(
-                      'https://maps.googleapis.com/maps/api/staticmap?center=Ljubljana&zoom=18&size=400x260&maptype=roadmap&markers=color:red%7Clabel:C%46.056896,14.505871&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'),
+                  new ImageView.singleImage('https://maps.googleapis.com/maps/api/staticmap?center=Ljubljana&zoom=18&size=400x260&maptype=roadmap&markers=color:red%7Clabel:C%46.056896,14.505871&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'),
                   new Container(
                     padding: new EdgeInsets.only(top: 8.0, right: 16.0, left: 16.0),
                     child: new Row(

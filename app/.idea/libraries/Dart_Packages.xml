@@ -23,13 +23,6 @@
             </list>
           </value>
         </entry>
-        <entry key="async_loader">
-          <value>
-            <list>
-              <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/async_loader-0.1.1/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="barback">
           <value>
             <list>
@@ -55,6 +48,20 @@
           <value>
             <list>
               <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="charts_common">
+          <value>
+            <list>
+              <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/charts_common-0.3.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="charts_flutter">
+          <value>
+            <list>
+              <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/charts_flutter-0.3.0/lib" />
             </list>
           </value>
         </entry>
@@ -160,6 +167,13 @@
           <value>
             <list>
               <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.1/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="intl">
+          <value>
+            <list>
+              <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.15.6/lib" />
             </list>
           </value>
         </entry>
@@ -380,6 +394,13 @@
             </list>
           </value>
         </entry>
+        <entry key="transparent_image">
+          <value>
+            <list>
+              <option value="/opt/flutter/.pub-cache/hosted/pub.dartlang.org/transparent_image-0.1.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="typed_data">
           <value>
             <list>
@@ -435,11 +456,12 @@
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-0.31.1/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.4.2/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.0.6/lib" />
-      <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/async_loader-0.1.1/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/barback-0.15.2+15/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-1.0.3/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.2.0/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.1/lib" />
+      <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/charts_common-0.3.0/lib" />
+      <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/charts_flutter-0.3.0/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.1.2+1/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.14.6/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/convert-2.0.1/lib" />
@@ -453,6 +475,7 @@
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.11.3+16/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/http_multi_server-2.0.4/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.1/lib" />
+      <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.15.6/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/io-0.3.2+1/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/isolate-1.1.0/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.1/lib" />
@@ -483,6 +506,7 @@
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.2/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.0.0/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/test-0.12.34/lib" />
+      <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/transparent_image-0.1.0/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.1.5/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/utf-0.9.0+4/lib" />
       <root url="file:///opt/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.0.6/lib" />

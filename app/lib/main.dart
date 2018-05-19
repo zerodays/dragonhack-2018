@@ -43,27 +43,6 @@ class _MainPageState extends State<MainPage> {
       appBar: new AppBar(
         title: new Text('Ime tripa na kerem sm'),
       ),
-      drawer: new Drawer(
-          child: new ListView(
-        children: <Widget>[
-          new DrawerHeader(
-            child: new Text('Header'),
-          ),
-          new ListTile(
-            title: new Text('First Menu Item'),
-            onTap: () {},
-          ),
-          new ListTile(
-            title: new Text('Second Menu Item'),
-            onTap: () {},
-          ),
-          new Divider(),
-          new ListTile(
-            title: new Text('About'),
-            onTap: () {},
-          ),
-        ],
-      )),
       body: new PageView(scrollDirection: Axis.vertical, children: [
         new Stats(),
         new History(),
