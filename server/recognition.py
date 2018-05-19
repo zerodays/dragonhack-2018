@@ -91,5 +91,5 @@ def get_vendor_name_from_text(dictionary):
 
 
 if __name__ == '__main__':
-    # get_price_from_text(temp)
-    print(get_vendor_name_from_text(temp))
+    get_price_from_text(temp)
+    get_vendor_name_from_text(temp)
