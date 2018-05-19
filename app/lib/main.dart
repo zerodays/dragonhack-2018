@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'camera_view.dart';
+import 'stats.dart';
 
 Future<Null> main() async {
   try {
@@ -9,17 +10,18 @@ Future<Null> main() async {
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
+
   runApp(new MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blue,
-        accentColor: Colors.deepOrange,
+        primarySwatch: Colors.cyan,
+        accentColor: Colors.tealAccent[400]
       ),
       home: new MainPage(),
     );
@@ -38,19 +40,52 @@ class _MainPageState extends State<MainPage> {
 
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Reciept Scanner'),
+        title: new Text('Ime tripa na kerem sm'),
       ),
-      body: new ListView(
-        children: alreadyScanned,
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () => Navigator.push(
-          context,
-          new MaterialPageRoute(builder: (context) => new CameraView()),
+      drawer: new Drawer(
+          child: new ListView(
+        children: <Widget>[
+          new DrawerHeader(
+            child: new Text('Header'),
+          ),
+          new ListTile(
+            title: new Text('First Menu Item'),
+            onTap: () {},
+          ),
+          new ListTile(
+            title: new Text('Second Menu Item'),
+            onTap: () {},
+          ),
+          new Divider(),
+          new ListTile(
+            title: new Text('About'),
+            onTap: () {},
+          ),
+        ],
+      )),
+      body: new PageView(scrollDirection: Axis.vertical, children: [
+        new Stats(),
+        new Container(color: Colors.blue),
+      ]),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: new Container(
+        padding: new EdgeInsets.only(left: 132.0, right: 132.0, bottom: 22.0),
+        child: new RaisedButton(
+          color: Theme.of(context).accentColor,
+          onPressed: () => print('neki'),
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(20.0)),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              new Icon(Icons.add),
+              new Text('Scan new',
+                style: new TextStyle(fontSize: 16.0),
+              ),
+            ],
+          ),
         ),
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ), // to-formatting nicer for build methods.
     );
   }
 
@@ -62,5 +97,4 @@ class _MainPageState extends State<MainPage> {
       )
     ];
   }
-
 }
