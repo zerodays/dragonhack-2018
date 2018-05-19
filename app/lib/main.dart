@@ -9,7 +9,6 @@ Future<Null> main() async {
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
-
   runApp(new MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -18,7 +17,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        primaryColor: Colors.blue,
+        accentColor: Colors.deepOrange,
       ),
       home: new MainPage(),
     );
