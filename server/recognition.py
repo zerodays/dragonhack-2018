@@ -181,7 +181,7 @@ def get_vendor_name_from_text(dictionary):
             else:
                 out = list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
     else:
-        out = receipt_text[0][0]
+        out = (receipt_text[0].split(" "))[0]
     return out.capitalize()
 
 
