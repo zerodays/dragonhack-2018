@@ -8,6 +8,8 @@ import 'receipt.dart';
 
 const String serverIp = 'http://46.101.179.230:8080';
 
+String totalPrice = '0.00';
+
 Future<Null> uploadImage(String fileName) async {
   File imageFile = new File(fileName);
 
@@ -32,29 +34,23 @@ Future<Null> uploadImage(String fileName) async {
   });
 }
 
+getRequest(Uri uri, {decodeJson: true}) async {
+  var httpClient = new HttpClient();
+  var request = await httpClient.getUrl(uri);
+  var response = await request.close();
+  var responseBody = await response.transform(utf8.decoder).join();
+  if (decodeJson)
+    return json.decode(responseBody);
+  else
+    return responseBody;
+}
+
+
 Future<List<Receipt>> getScannedReciepts() async {
-  return [
-    new Receipt(
-      {'vendor': 'Mercator',
-      'price': '34.00',
-      'id': 'd21!@LQWe12qwlD12DLAsd',
-      'time': '1526760985'
-      }
-    ),
-    new Receipt(
-      {'vendor': 'Interspar',
-      'price': '2.99',
-      'id': 'd21!23423e12qwlD12DLAsd',
-      'time': '1526060985'
-      }
-    ),
-    new Receipt(
-      {'vendor': 'Hofer',
-      'price': '12.45',
-      'id': 'd21!@LQsdf12qwlD12DLAsd',
-      'time': '1520760985'
-      }
-    )
-  ];
+  Map data = await getRequest(new Uri.https(serverIp, 'history/'));
+  
+  totalPrice = data['total'];
+
+  return data['receipts'].cast<Map<String, dynamic>>();
 }
 
