@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'camera_view.dart';
 import 'stats.dart';
+import 'history.dart';
 
 Future<Null> main() async {
   try {
@@ -65,27 +66,31 @@ class _MainPageState extends State<MainPage> {
       )),
       body: new PageView(scrollDirection: Axis.vertical, children: [
         new Stats(),
-        new Container(color: Colors.blue),
+        new History(),
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: new Container(
-        padding: new EdgeInsets.only(left: 132.0, right: 132.0, bottom: 22.0),
+        width: 160.0,
+        padding: new EdgeInsets.only(bottom: 20.0),
         child: new RaisedButton(
           color: Theme.of(context).accentColor,
           onPressed: () => Navigator.of(context).push(
             new MaterialPageRoute(builder: (context) => new CameraView()),
           ),
           shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(20.0)),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              new Icon(Icons.add),
-              new Text('Scan new',
-                style: new TextStyle(fontSize: 16.0),
-              ),
-            ],
-          ),
+              borderRadius: new BorderRadius.circular(24.0)),
+          child: new Container(
+            height: 46.0,
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new Icon(Icons.add, size: 28.0,),
+                new Text('Scan new',
+                  style: new TextStyle(fontSize: 18.0),
+                ),
+              ],
+            ),
+          )
         ),
       ), // to-formatting nicer for build methods.
     );
