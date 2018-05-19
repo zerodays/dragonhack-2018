@@ -1,28 +1,76 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'tmp.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class Chart extends StatefulWidget {
   @override
   _ChartState createState() => new _ChartState();
 }
+
 class _ChartState extends State<Chart> {
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: new AnimatedCircularChart(
-        key: _chartKey,
-        size: const Size(300.0, 300.0),
-        initialChartData: data,
-        chartType: CircularChartType.Pie,
-      ),
+    return new Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        new AnimatedCircularChart(
+            key: _chartKey,
+            size: const Size(300.0, 400.0),
+            initialChartData: data,
+            chartType: CircularChartType.Radial,
+            edgeStyle: SegmentEdgeStyle.round,
+            percentageValues: false),
+        new FlatButton(
+          onPressed: () => print('asdf'), //TODO
+//            splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          child: new Container(
+            height: 400.0,
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Column(
+                  children: <Widget>[
+                    new Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        new Text(
+                          '3.54 ', // TODO: tole mora bit hero na novo stran
+                          style: new TextStyle(
+                              fontSize: 36.0, fontWeight: FontWeight.normal),
+                        ),
+                        new Container(
+                          padding: new EdgeInsets.only(left: 8.0, bottom: 2.0),
+                          child: new Text(
+                            '€',
+                            style: new TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.grey[500],
+                                fontWeight: FontWeight.normal),
+                          ),
+                        )
+                      ],
+                    ),
+                    new Text(
+                      'Tap for more.',
+                      style: new TextStyle(
+                          color: Colors.grey[500],
+                          fontWeight: FontWeight.normal),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
 
-
-final GlobalKey<AnimatedCircularChartState> _chartKey = new GlobalKey<AnimatedCircularChartState>();
+final GlobalKey<AnimatedCircularChartState> _chartKey =
+    new GlobalKey<AnimatedCircularChartState>();
 List<CircularStackEntry> data = <CircularStackEntry>[
   new CircularStackEntry(
     <CircularSegmentEntry>[
