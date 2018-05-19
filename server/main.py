@@ -5,6 +5,7 @@ from flask import Flask, request
 import recognition
 import json
 import time
+from PIL import Image
 
 app = Flask(__name__)
 receipts_file = "receipts.txt"
@@ -14,6 +15,8 @@ def recognize():
     id = str(uuid.uuid4())
     filename = f'images/{id}.jpg'
     request.files['file'].save(filename)
+    picture= Image.open(filename)
+    picture.rotate(-90).save(filename)
 
     image = image_helpers.image_to_base64(filename)
 
