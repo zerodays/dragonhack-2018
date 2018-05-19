@@ -1,5 +1,5 @@
-from testing_vars import temp
 import difflib
+import json
 
 
 def get_price_from_text(dictionary):
@@ -9,6 +9,26 @@ def get_price_from_text(dictionary):
     :return: price as float
     """
     data = dictionary['responses'][0]['textAnnotations']
+
+    # Get main poly positions
+    main_vertices = data[0]['boundingPoly']['vertices']
+    min_x = min(map(lambda x: x['x'], main_vertices))
+    max_x = max(map(lambda x: x['x'], main_vertices))
+    min_y = min(map(lambda x: x['y'], main_vertices))
+    max_y = max(map(lambda x: x['y'], main_vertices))
+
+    eur_labels = []
+    for annotation in data:
+        text = annotation['description']
+        if text != 'EUR':
+            continue
+
+        vertices = annotation['boundingPoly']['vertices']
+        absolute_x = min(map(lambda x: x['x'], vertices))
+        absolute_y = min(map(lambda x: x['y'], vertices))
+
+        eur_labels.append((absolute_x - min_x, absolute_y - min_y))
+
     numbers = []
     for annotation in data:
         text = annotation['description']
@@ -35,6 +55,7 @@ def get_price_from_text(dictionary):
         if len(splited[0]) > 4 or len(splited[1]) != 2:
             continue
 
+        # Convert price to number
         try:
             whole = int(splited[0])
             part = int(splited[1])
@@ -43,9 +64,67 @@ def get_price_from_text(dictionary):
 
         price = whole + part / 100
 
-        numbers.append((price, annotation))
+        # Get position
+        vertices = annotation['boundingPoly']['vertices']
+        absolute_x = min(map(lambda x: x['x'], vertices))
+        absolute_y = min(map(lambda x: x['y'], vertices))
 
+        relative_x = (absolute_x - min_x) / (max_x - min_x)
+        relative_y = (absolute_y - min_y) / (max_y - min_y)
+
+        # Calculate position from eur
+        absolute_x -= min_x
+        absolute_y -= min_y
+
+        distances_x = []
+        distances_y = []
+        for eur_label in eur_labels:
+            distance_x = abs(absolute_x - eur_label[0])
+            distance_y = abs(absolute_y - eur_label[1])
+
+            distance_x /= (max_x - min_x)
+            distance_y /= (max_y - min_y)
+
+            score_x = 1.0 - distance_x
+            score_y = 1.0 - distance_y
+
+            distances_x.append(score_x)
+            distances_y.append(score_y)
+
+        height = max(map(lambda x: x['y'], vertices)) - min(map(lambda x: x['y'], vertices))
+
+        res = {
+            'price': price,
+            'score_x': relative_x,
+            'score_y': relative_y * 2,
+            'score_eur_x': max(distances_y),
+            'score_eur_y': max(distances_y),
+            'score_height': height,
+        }
+
+        numbers.append(res)
+
+    # Append price and eur distance score
+    max_price = max(map(lambda x: x['price'], numbers))
+    max_y_distance = max(map(lambda x: x['score_eur_y'], numbers)) ** 2
+    max_height = max(map(lambda x: x['score_height'], numbers))
+    for d in numbers:
+        d['score_price'] = (d['price'] / max_price) * 0.3
+
+        d['score_eur_y'] **= 2
+        d['score_eur_y'] /= max_y_distance
+
+        d['score_height'] /= max_height
+
+    # Calculate final score
+    for d in numbers:
+        d['score'] = d['score_x'] + d['score_y'] +  d['score_eur_x'] + d['score_eur_y'] + d['score_height'] + d['score_price']
+
+
+    numbers.sort(key=lambda x: x['score'], reverse=True)
     print('\n'.join(map(str, numbers)))
+
+    return numbers[0]['price']
 
 
 def get_vendor_name_from_text(dictionary):
@@ -59,15 +138,15 @@ def get_vendor_name_from_text(dictionary):
         """
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
-        temp_possible_vendors = []
+        data1_possible_vendors = []
         possible_strings += [j + " d.o.o." for j in
                              possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         for i in data:  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
             if possibilities:
-                temp_possible_vendors += possibilities
-        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in temp_possible_vendors))
+                data1_possible_vendors += possibilities
+        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.") for w in data1_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")  # Get the actual receipt text
@@ -96,5 +175,6 @@ def get_vendor_name_from_text(dictionary):
 
 
 if __name__ == '__main__':
-    get_price_from_text(temp)
-    get_vendor_name_from_text(temp)
+    data = json.load(open('data3.txt'))
+    get_price_from_text(data)
+    get_vendor_name_from_text(data)

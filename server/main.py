@@ -1,6 +1,7 @@
 import image_helpers
 import requests
 from flask import Flask, request
+import recognition
 
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ app = Flask(__name__)
 @app.route('/recognize', methods=['POST'])
 def recognize():
     # print(request.data)
-    image = image_helpers.image_to_base64('../sample_images/IMG_20180519_123741.jpg')
+    image = image_helpers.image_to_base64('../sample_images/IMG_20180519_123749.jpg')
 
     url = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'
     data = {
@@ -32,8 +33,10 @@ def recognize():
     }
 
     r = requests.post(url, json=data)
-    # print(r.json())
-    return request.data
+
+    print(recognition.get_price_from_text(r.json()))
+
+    return 'dummy string'
 
 
 if __name__ == '__main__':
