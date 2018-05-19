@@ -56,6 +56,8 @@ def recognize():
         'price': receipt_price,
         'id': upload_id,
         'time': curr_time,
+        'lat': request.args.get('lat'),
+        'lon': request.args.get('lon'),
     }
 
     # Check if file exists - if not, make a template file
