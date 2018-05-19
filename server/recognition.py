@@ -77,19 +77,22 @@ def get_vendor_name_from_text(dictionary):
     possible_vendors = is_close(receipt_text[:20], vendors, 0.8)  # Get the possible vendors
 
     possible_vendors = list(set(possible_vendors))
+    out = ""
     if len(possible_vendors) == 1:  # If only one vendor is found, return it
-        return possible_vendors[0]
+        out = possible_vendors[0]
     elif len(possible_vendors) > 0:  # If there is more than one vendor found, narrow down the search
         possible_vendors = list(set(is_close(receipt_text[:20], vendors, 1)))
         if possible_vendors:
-            return possible_vendors[0]
+            out = possible_vendors[0]
         else:  # If suddenly no vendors are found anymore
             possible_vendors = list(set(is_close(receipt_text[:20], vendors, 0.95)))
             if possible_vendors:
-                return possible_vendors[0]
-            return list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
+                out = possible_vendors[0]
+            else:
+                out = list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
     else:
-        return receipt_text[0]
+        out = receipt_text[0]
+    return out.capitalize()
 
 
 if __name__ == '__main__':
