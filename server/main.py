@@ -76,7 +76,6 @@ def upload_test():
     # Check if file exists - if not, make a template file
     import os.path
     if not os.path.exists(receipts_file) or os.path.getsize(receipts_file) == 0:
-        print("Creating file!")
         with open(receipts_file, "w") as init_f:
             basic_json = {
                 'receipts': [],
@@ -103,4 +102,3 @@ def upload_test():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
-    # recognize()
