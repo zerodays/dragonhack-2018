@@ -209,7 +209,7 @@ def get_vendor_name_from_text(dictionary):
         pass
     if 'hofer' in out.lower():
         out = 'hofer'
-    return out.capitalize()
+    return out.title()
 
 
 if __name__ == '__main__':
