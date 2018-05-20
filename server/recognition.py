@@ -167,6 +167,7 @@ def get_vendor_name_from_text(dictionary):
     possible_vendors = is_close(receipt_text[:20], vendors, 0.8)  # Get the possible vendors
 
     possible_vendors = list(set(possible_vendors))
+    print(possible_vendors)
     out = ""
     if len(possible_vendors) == 1:  # If only one vendor is found, return it
         out = possible_vendors[0]
