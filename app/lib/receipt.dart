@@ -100,7 +100,7 @@ class _ReceiptState extends State<Receipt> {
                         children: <Widget>[
                           new Icon(
                             Icons.image,
-                            color: Theme.of(context).primaryColorDark,
+                            color: Theme.of(context).primaryColor,
                           ),
                           new Text('View',
                               style: new TextStyle(
@@ -115,7 +115,7 @@ class _ReceiptState extends State<Receipt> {
                         children: <Widget>[
                           new Icon(
                             Icons.map,
-                            color: Theme.of(context).primaryColorDark,
+                            color: Theme.of(context).primaryColor,
                           ),
                           new Text('Maps',
                               style: new TextStyle(
@@ -130,7 +130,7 @@ class _ReceiptState extends State<Receipt> {
                         children: <Widget>[
                           new Icon(
                             Icons.delete,
-                            color: Theme.of(context).primaryColorDark,
+                            color: Theme.of(context).primaryColor,
                           ),
                           new Text('Delete',
                               style: new TextStyle(
