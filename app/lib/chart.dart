@@ -22,11 +22,11 @@ class _ChartState extends State<Chart> {
     List<CircularStackEntry> plotData = <CircularStackEntry>[
     new CircularStackEntry(
       <CircularSegmentEntry>[
-        new CircularSegmentEntry(vendorvalues[0], Colors.cyan[100]),
-        new CircularSegmentEntry(vendorvalues[1], Colors.cyan[300]),
-        new CircularSegmentEntry(vendorvalues[2], Colors.cyan[600]),
-        new CircularSegmentEntry(vendorvalues[3], Colors.teal[200]),
-        new CircularSegmentEntry(vendorvalues[4], Colors.tealAccent[100]),
+        new CircularSegmentEntry(vendorvalues[0], Colors.lightBlue[200]),
+        new CircularSegmentEntry(vendorvalues[1], Colors.red[200]),
+        new CircularSegmentEntry(vendorvalues[3], Colors.cyan[200]),
+        new CircularSegmentEntry(vendorvalues[2], Colors.purple[200]),
+        new CircularSegmentEntry(vendorvalues[4], Colors.grey[300]),
       ],
     )];
 
@@ -59,31 +59,31 @@ class _ChartState extends State<Chart> {
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
-                            size: 18.0, color: Colors.cyan[100]),
+                            size: 18.0, color: Colors.lightBlue[200]),
                         label: new Text(vendornames[0]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
-                            size: 18.0, color: Colors.cyan[300]),
+                            size: 18.0, color: Colors.red[200]),
                         label: new Text(vendornames[1]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
-                            size: 18.0, color: Colors.cyan[600]),
+                            size: 18.0, color: Colors.cyan[200]),
                         label: new Text(vendornames[2]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
-                            size: 18.0, color: Colors.teal[200]),
+                            size: 18.0, color: Colors.purple[200]),
                         label: new Text(vendornames[3]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
-                            size: 18.0, color: Colors.tealAccent[100]),
+                            size: 18.0, color: Colors.grey[300]),
                         label: new Text(vendornames[4]),
                       )
                     ],
