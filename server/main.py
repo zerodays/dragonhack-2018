@@ -92,7 +92,7 @@ def history():
 
     data['receipts'] = data['receipts'][:30]
 
-    return json.dumps(data)
+    return json.dumps(data, ensure_ascii=False)
 
 
 vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda", "dijaški dom vič"]
@@ -158,7 +158,7 @@ def statistics():
                 organized_vendors[key] = round(organized_vendors[key], 2)
             r['vendors'] = organized_vendors
 
-    return json.dumps({'statistics': res})
+    return json.dumps({'statistics': res}, ensure_ascii=False)
 
 
 @app.route('/delete')
