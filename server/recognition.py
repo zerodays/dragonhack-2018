@@ -99,6 +99,12 @@ def get_price_from_text(dictionary):
             distances_x.append(score_x)
             distances_y.append(score_y)
 
+        if len(distances_x) == 0:
+            distances_x.append(0.0)
+
+        if len(distances_y) == 0:
+            distances_y.append(0.0)
+
         height = max(map(lambda x: x['y'], vertices)) - min(map(lambda x: x['y'], vertices))
 
         res = {
