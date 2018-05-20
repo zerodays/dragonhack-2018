@@ -53,7 +53,7 @@ class _DetailsState extends State<Details> {
                     ),
                     new Container(height: 32.0),
                     new Container(
-                        padding: new EdgeInsets.fromLTRB(24.0, 0.0, 10.0, 0.0),
+                        padding: new EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                         height: 240.0,
                         child: new BarChart(spentPerWeekday)
                       )
@@ -91,7 +91,7 @@ class _DetailsState extends State<Details> {
                                     ).format(widget.data['total']),    
                                      // TODO: tole mora bit hero na novo stran
                                     style: new TextStyle(
-                                        fontSize: 32.0,
+                                        fontSize: 28.0,
                                         fontWeight: FontWeight.normal),
                                   ),
                                   new Container(
