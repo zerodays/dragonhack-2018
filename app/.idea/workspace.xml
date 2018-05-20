@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3b59a467-2555-4988-be32-e47c7d2b358c" name="Default" comment="">
+    <list default="true" id="3b59a467-2555-4988-be32-e47c7d2b358c" name="Default" comment="add action to maps button">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/receipt.dart" afterPath="$PROJECT_DIR$/lib/receipt.dart" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" afterPath="$PROJECT_DIR$/pubspec.lock" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
+      <change beforePath="$PROJECT_DIR$/lib/chart.dart" afterPath="$PROJECT_DIR$/lib/chart.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -32,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receipt.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="receipt.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/receipt.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="219">
@@ -64,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chart.dart" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chart.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/chart.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1187">
-              <caret line="85" column="60" lean-forward="false" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
+            <state relative-caret-position="285">
+              <caret line="100" column="24" lean-forward="false" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -128,10 +128,10 @@
         <option value="$PROJECT_DIR$/lib/bar_chart.dart" />
         <option value="$PROJECT_DIR$/lib/details.dart" />
         <option value="$PROJECT_DIR$/lib/camera_view.dart" />
-        <option value="$PROJECT_DIR$/lib/chart.dart" />
         <option value="$PROJECT_DIR$/lib/history.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/receipt.dart" />
+        <option value="$PROJECT_DIR$/lib/chart.dart" />
       </list>
     </option>
   </component>
@@ -223,8 +223,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/api.dart</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lib/chart.dart</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/../server/recognition.py</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
@@ -589,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526790389932</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="add action to maps button">
+      <created>1526791022726</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1526791022726</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -674,7 +679,8 @@
     <MESSAGE value="fix markers" />
     <MESSAGE value="add .gitignore for as" />
     <MESSAGE value="minor fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fixes" />
+    <MESSAGE value="add action to maps button" />
+    <option name="LAST_COMMIT_MESSAGE" value="add action to maps button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1020,14 +1026,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/chart.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1187">
-          <caret line="85" column="60" lean-forward="false" selection-start-line="85" selection-start-column="60" selection-end-line="85" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -1061,6 +1059,14 @@
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/chart.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="100" column="24" lean-forward="false" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

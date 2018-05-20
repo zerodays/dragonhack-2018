@@ -98,7 +98,7 @@ class _ChartState extends State<Chart> {
                 edgeStyle: SegmentEdgeStyle.round,
                 percentageValues: false),
             new Container(
-              height: 60.0,
+              height: 70.0,
             ),
           ],
         ),
@@ -119,7 +119,7 @@ class _ChartState extends State<Chart> {
                   children: <Widget>[
                     new Container(height: 40.0),
                     new Hero(
-                        tag: 'tag:',
+                        tag: 'tag',
                         //TODO: tale tag mora bit za usak mesec drgacn
                         child: new Material(
                           color: Colors.transparent,
@@ -142,12 +142,15 @@ class _ChartState extends State<Chart> {
                               new Container(
                                 padding:
                                     new EdgeInsets.only(left: 8.0, bottom: 2.0),
-                                child: new Text(
-                                  '€',
-                                  style: new TextStyle(
-                                      fontSize: 24.0,
-                                      color: Colors.grey[500],
-                                      fontWeight: FontWeight.normal),
+                                child: new Container(
+                                  padding: new EdgeInsets.only(bottom: 3.0),
+                                  child:  new Text(
+                                    '€',
+                                    style: new TextStyle(
+                                        fontSize: 24.0,
+                                        color: Colors.grey[500],
+                                        fontWeight: FontWeight.normal),
+                                  ),
                                 ),
                               )
                             ],
