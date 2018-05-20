@@ -100,6 +100,7 @@ vendors = list(map(lambda x: x.capitalize(), vendors))
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+@app.route('/statistics')
 def statistics():
     with open(receipts_file, 'r') as f:
         data = json.loads(f.read())
