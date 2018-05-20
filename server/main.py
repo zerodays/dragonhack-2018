@@ -86,7 +86,7 @@ def history():
     with open(receipts_file, 'r') as f:
         data = json.loads(f.read())
 
-    data['receipts'] = data['receipts'][:30]
+    data['receipts'] = data['receipts'][-30:]
 
     return json.dumps(data)
 
