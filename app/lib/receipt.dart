@@ -149,7 +149,7 @@ class _ReceiptState extends State<Receipt> {
 }
 
 String getMapUrl(String lat, String lon) {
-  return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat, $lon&zoom=18&size=400x260&maptype=roadmap&markers=color:red%$lat, $lon&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE';
+  return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat, $lon&zoom=18&size=400x260&maptype=roadmap&markers=color:red|$lat,$lon&key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE';
 }
 
 String formatDate(double timestamp) {
