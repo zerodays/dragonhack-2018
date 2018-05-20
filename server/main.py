@@ -9,8 +9,10 @@ from PIL import Image
 import datetime
 from collections import defaultdict
 
+
 app = Flask(__name__)
 receipts_file = "receipts.txt"
+
 
 @app.route('/recognize', methods=['POST'])
 def recognize():
@@ -82,6 +84,7 @@ def recognize():
     # Return the json data
     return history()
 
+
 @app.route('/history')
 def history():
     with open(receipts_file, 'r') as f:
@@ -97,7 +100,6 @@ vendors = list(map(lambda x: x.capitalize(), vendors))
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-@app.route('/statistics')
 def statistics():
     with open(receipts_file, 'r') as f:
         data = json.loads(f.read())
@@ -157,9 +159,31 @@ def statistics():
 
     return json.dumps({'statistics': res})
 
+
+@app.route('/delete')
+def delete_upload():
+    to_delete = str(request.args.get('id'))
+    print(to_delete)
+    with open(receipts_file, 'r') as f:
+        data = json.loads(f.read())
+
+    delete_index = None
+    for index, receipt in enumerate(data['receipts']):
+        if receipt['id'] == to_delete:
+            delete_index = index
+            break
+    data['receipts'].pop(delete_index)
+
+    with open(receipts_file, "w") as f:
+        json.dump(data, f)
+
+    return 'neki je podeletal'
+
+
 @app.route('/<path:filename>')
 def server_image(filename):
     return send_from_directory('images', filename)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
