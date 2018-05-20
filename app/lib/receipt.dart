@@ -154,5 +154,5 @@ String getMapUrl(String lat, String lon) {
 
 String formatDate(double timestamp) {
   var datetime = DateTime.fromMillisecondsSinceEpoch(1000 * timestamp.toInt());
-  return new DateFormat('E d. MMM').format(datetime);
+  return new DateFormat('E d. MMM,  hh:mm').format(datetime);
 }

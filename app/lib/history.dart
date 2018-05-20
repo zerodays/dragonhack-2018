@@ -39,10 +39,12 @@ class _HistoryState extends State<History> {
         body: new Container(
             padding: new EdgeInsets.only(bottom: 70.0),
             child: new ListView(
-              padding: new EdgeInsets.only(left: 16.0),
+              padding: new EdgeInsets.only(left: 16.0, right: 16.0),
               // This next line does the trick.
               scrollDirection: Axis.horizontal,
-              children: receipts
+              children: receipts,
+              shrinkWrap: true,
+              reverse: true,
             )));
   }
 }
