@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b59a467-2555-4988-be32-e47c7d2b358c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/receipt.dart" afterPath="$PROJECT_DIR$/lib/receipt.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -537,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526787848659</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix markers">
+      <created>1526789359920</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1526789359920</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -620,7 +628,8 @@
     <MESSAGE value="fix shutter icon" />
     <MESSAGE value="minor design fix" />
     <MESSAGE value="update chart colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="update chart colors" />
+    <MESSAGE value="fix markers" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix markers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
