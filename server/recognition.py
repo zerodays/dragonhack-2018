@@ -145,6 +145,7 @@ def get_vendor_name_from_text(dictionary):
     """
 
     def is_close(data, possible_strings, diff):
+        print(data)
         """
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
@@ -167,7 +168,6 @@ def get_vendor_name_from_text(dictionary):
     possible_vendors = is_close(receipt_text[:20], vendors, 0.8)  # Get the possible vendors
 
     possible_vendors = list(set(possible_vendors))
-    print(possible_vendors)
     out = ""
     if len(possible_vendors) == 1:  # If only one vendor is found, return it
         out = possible_vendors[0]
@@ -181,7 +181,6 @@ def get_vendor_name_from_text(dictionary):
                 out = possible_vendors[0]
             else:
                 out = list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
-    print(out)
     if not out:
         out = receipt_text[0]
 
