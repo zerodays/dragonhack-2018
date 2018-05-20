@@ -56,6 +56,12 @@ Future<Null> uploadImage(String fileName) async {
   });
 
   reload();
+
+  if (response.statusCode == 200) {
+    showSnackbar('Receipt scanned!');
+  } else {
+    showSnackbar('Something went wrong...');
+  }
 }
 
 getRequest(Uri uri, {decodeJson: true}) async {
