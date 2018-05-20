@@ -104,7 +104,9 @@ class _ChartState extends State<Chart> {
         ),
         new FlatButton(
           onPressed: () => Navigator.of(context).push(
-                new MaterialPageRoute(builder: (context) => new Details()),
+                new MaterialPageRoute(builder: (context) => new Details(
+                  widget.data
+                )),
               ), //TODO
 //            splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

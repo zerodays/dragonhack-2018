@@ -8,24 +8,16 @@ import 'package:charts_flutter/flutter.dart' as charts;
 /// There are many axis styling options in the SmallTickRenderer allowing you
 /// to customize the font, tick lengths, and offsets.
 class BarChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
+  final List<double> list;
   final bool animate;
 
-  BarChart(this.seriesList, {this.animate});
-
-  factory BarChart.withSampleData() {
-    return new BarChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: true,
-    );
-  }
+  BarChart(this.list, {this.animate: true});
 
 
   @override
   Widget build(BuildContext context) {
     return new charts.BarChart(
-      seriesList,
+      getGraphs(list),
       animate: animate,
 
       /// Customize the primary measure axis using a small tick renderer.
@@ -40,21 +32,21 @@ class BarChart extends StatelessWidget {
   }
 
   /// Create series list with single series
-  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
+  List<charts.Series<OrdinalSales, String>> getGraphs(List<double> l) {
     final globalSalesData = [
-      new OrdinalSales('Mon', 13),
-      new OrdinalSales('Tue', 20),
-      new OrdinalSales('Wen', 4),
-      new OrdinalSales('Thu', 16),
-      new OrdinalSales('Fri', 52),
-      new OrdinalSales('Sat', 0),
-      new OrdinalSales('Sun', 10),
+      new OrdinalSales('Mon', (l[0] * 100).floor()),
+      new OrdinalSales('Tue', (l[1] * 100).floor()),
+      new OrdinalSales('Wen', (l[2] * 100).floor()),
+      new OrdinalSales('Thu', (l[3] * 100).floor()),
+      new OrdinalSales('Fri', (l[4] * 100).floor()),
+      new OrdinalSales('Sat', (l[5] * 100).floor()),
+      new OrdinalSales('Sun', (l[6] * 100).floor()),
     ];
 
     return [
       new charts.Series<OrdinalSales, String>(
-        id: 'Global Revenue',
-        domainFn: (OrdinalSales sales, _) => sales.year,
+        id: 'Chart id',
+        domainFn: (OrdinalSales sales, _) => sales.day,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: globalSalesData,
       ),
@@ -62,10 +54,9 @@ class BarChart extends StatelessWidget {
   }
 }
 
-/// Sample ordinal data type.
 class OrdinalSales {
-  final String year;
+  final String day;
   final int sales;
 
-  OrdinalSales(this.year, this.sales);
+  OrdinalSales(this.day, this.sales);
 }

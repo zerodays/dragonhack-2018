@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'bar_chart.dart';
+import 'package:intl/intl.dart';
 
 class Details extends StatefulWidget {
+  final Map<String, dynamic> data;
+
+  Details(this.data);
+
   @override
   _DetailsState createState() => new _DetailsState();
 }
@@ -9,9 +14,27 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
+    List<double> spentPerWeekday = widget.data['weekdays'].values.toList().cast<double>();
+
+    List<Widget> expenseHistory = widget.data['vendors'].keys.toList().map(
+      (String vendorname) => new Container(
+        padding: new EdgeInsets.only(bottom: 14.0),
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new Text(vendorname, style: new TextStyle(fontSize: 16.0),),
+            new Text(widget.data['vendors'][vendorname].toString() + ' €',
+              style: new TextStyle(color: Colors.grey[600],
+              fontSize: 15.0),
+            )
+          ],
+        ),
+      ),
+    ).toList().cast<Widget>();
+
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('May 2018'),
+          title: new Text(widget.data['month'] + ' ' + widget.data['year'].toString()),
           centerTitle: true,
         ),
         body: new ListView(
@@ -32,7 +55,8 @@ class _DetailsState extends State<Details> {
                     new Container(
                         padding: new EdgeInsets.fromLTRB(24.0, 0.0, 10.0, 0.0),
                         height: 240.0,
-                        child: new BarChart.withSampleData())
+                        child: new BarChart(spentPerWeekday)
+                      )
                   ],
                 )),
             new Card(
@@ -61,8 +85,11 @@ class _DetailsState extends State<Details> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
                                   new Text(
-                                    '3.54 ',
-                                    // TODO: tole mora bit hero na novo stran
+                                    new NumberFormat.currency(
+                                      locale: 'en',
+                                      symbol: ''
+                                    ).format(widget.data['total']),    
+                                     // TODO: tole mora bit hero na novo stran
                                     style: new TextStyle(
                                         fontSize: 28.0,
                                         fontWeight: FontWeight.normal),
@@ -87,53 +114,9 @@ class _DetailsState extends State<Details> {
                     new Divider(),
                     new Container(height: 16.0),
 
-                    //TODO: od tuki napreej notr ufukas statistiko
-                    new Container(
-                      padding: new EdgeInsets.only(bottom: 14.0),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text('Mercator', style: new TextStyle(fontSize: 16.0),),
-                          new Text('14.32 €', style: new TextStyle(color: Colors.grey[600], fontSize: 15.0),)
-                        ],
-                      ),
-                    ),
-
-                    new Container(
-                      padding: new EdgeInsets.only(bottom: 14.0),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text('Mercator', style: new TextStyle(fontSize: 16.0),),
-                          new Text('14.32 €', style: new TextStyle(color: Colors.grey[600], fontSize: 15.0),)
-                        ],
-                      ),
-                    ),
-
-                    new Container(
-                      padding: new EdgeInsets.only(bottom: 14.0),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text('Mercator', style: new TextStyle(fontSize: 16.0),),
-                          new Text('14.32 €', style: new TextStyle(color: Colors.grey[600], fontSize: 15.0),)
-                        ],
-                      ),
-                    ),
-
-                    new Container(
-                      padding: new EdgeInsets.only(bottom: 14.0),
-                      child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          new Text('Mercator', style: new TextStyle(fontSize: 16.0),),
-                          new Text('14.32 €', style: new TextStyle(color: Colors.grey[600], fontSize: 15.0),)
-                        ],
-                      ),
-                    ),
-
-
-
+                    new Column(
+                      children: expenseHistory
+                    )
 
                   ],
                 ),
