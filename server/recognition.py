@@ -121,6 +121,8 @@ def get_price_from_text(dictionary):
     # Append price and eur distance score
     max_price = max(map(lambda x: x['price'], numbers))
     max_y_distance = max(map(lambda x: x['score_eur_y'], numbers)) ** 2
+    if max_y_distance == 0:
+        max_y_distance = 1
     max_height = max(map(lambda x: x['score_height'], numbers))
     max_occurances = max(occurances.values())
     for d in numbers:
