@@ -91,7 +91,7 @@ class _DetailsState extends State<Details> {
                                     ).format(widget.data['total']),    
                                      // TODO: tole mora bit hero na novo stran
                                     style: new TextStyle(
-                                        fontSize: 28.0,
+                                        fontSize: 32.0,
                                         fontWeight: FontWeight.normal),
                                   ),
                                   new Container(

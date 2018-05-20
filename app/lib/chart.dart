@@ -136,18 +136,18 @@ class _ChartState extends State<Chart> {
 
                                 // TODO: tole mora bit hero na novo stran
                                 style: new TextStyle(
-                                    fontSize: 44.0,
+                                    fontSize: 34.0,
                                     fontWeight: FontWeight.normal),
                               ),
                               new Container(
                                 padding:
-                                    new EdgeInsets.only(left: 8.0, bottom: 2.0),
+                                    new EdgeInsets.only(left: 6.0),
                                 child: new Container(
                                   padding: new EdgeInsets.only(bottom: 3.0),
                                   child:  new Text(
                                     '€',
                                     style: new TextStyle(
-                                        fontSize: 24.0,
+                                        fontSize: 22.0,
                                         color: Colors.grey[500],
                                         fontWeight: FontWeight.normal),
                                   ),
