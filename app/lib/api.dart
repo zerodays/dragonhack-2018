@@ -88,3 +88,13 @@ Future<List<Chart>> getStatics() async {
     (Map map) => new Chart(map)
   ).toList();
 }
+
+Future<void> deleteReceipt(String id) async {
+  var uri = Uri.parse(serverIp + '/delete?id=$id');
+  
+  var httpClient = new HttpClient();
+  var request = await httpClient.getUrl(uri);
+  var response = await request.close();
+
+  reload();
+}

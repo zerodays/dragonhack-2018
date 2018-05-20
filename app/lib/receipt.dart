@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'image_view.dart';
 import 'receipt_view.dart';
 import 'dart:async';
+import 'api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Receipt extends StatefulWidget {
@@ -126,7 +127,7 @@ class _ReceiptState extends State<Receipt> {
                         ],
                       )),
                   new FlatButton(
-                      onPressed: () => print('asdf'), // TODO: neki nared
+                      onPressed: () => deleteReceipt(id), // TODO: neki nared
                       padding: new EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 6.0),
                       child: new Column(
                         children: <Widget>[
