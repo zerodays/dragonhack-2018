@@ -16,7 +16,11 @@ with open(receipts_file, "r") as f:
 receipts = data['receipts']
 
 for month in range(1, 6):
-    for day in range(1, 29):
+    if month == 5:
+        max_day = 20
+    else:
+        max_day = 29
+    for day in range(1, max_day):
         repetitions = randint(1, 3)
         for i in range(repetitions):
             vendor_index = randint(0, len(vendors) -1)
