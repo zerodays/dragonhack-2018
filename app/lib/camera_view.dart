@@ -29,6 +29,12 @@ class _CameraViewState extends State<CameraView> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Stack(
