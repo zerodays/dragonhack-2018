@@ -152,7 +152,7 @@ def get_vendor_name_from_text(dictionary):
         temp_possible_strings = [l for l in possible_strings]
         possible_strings += [j + " d.o.o." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         possible_strings += [j + " d.d." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
-        for i in data:  # Checks the data if it contains something close enough to any of the vendor names
+        for i in data.split(" "):  # Checks the data if it contains something close enough to any of the vendor names
             i = i.lower()
             possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
             if possibilities:
