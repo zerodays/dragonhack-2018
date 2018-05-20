@@ -18,9 +18,9 @@ class _HistoryState extends State<History> {
     super.initState();
   }
 
-  Future<void> getReceipts() async {
+  Future<Null> getReceipts() async {
     var rec = await getScannedReciepts();
-    setState(() {
+    if (mounted) setState(() {
       receipts = rec;
     });
   }

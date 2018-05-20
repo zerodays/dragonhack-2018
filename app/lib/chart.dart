@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'details.dart';
+import 'package:intl/intl.dart';
 
 class Chart extends StatefulWidget {
+  Map<String, dynamic> data;
+
+  Chart(this.data);
+
   @override
   _ChartState createState() => new _ChartState();
 }
@@ -10,6 +15,21 @@ class Chart extends StatefulWidget {
 class _ChartState extends State<Chart> {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> vendors = widget.data['vendors'];
+    List<String> vendornames = vendors.keys.toList();
+    List vendorvalues = vendors.values.toList();
+
+    List<CircularStackEntry> plotData = <CircularStackEntry>[
+    new CircularStackEntry(
+      <CircularSegmentEntry>[
+        new CircularSegmentEntry(vendorvalues[0], Colors.cyan[100]),
+        new CircularSegmentEntry(vendorvalues[1], Colors.cyan[300]),
+        new CircularSegmentEntry(vendorvalues[2], Colors.cyan[600]),
+        new CircularSegmentEntry(vendorvalues[3], Colors.teal[200]),
+        new CircularSegmentEntry(vendorvalues[4], Colors.tealAccent[100]),
+      ],
+    )];
+
     return new Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -24,9 +44,9 @@ class _ChartState extends State<Chart> {
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Text('May', style: TextStyle(fontSize: 22.0)),
+                      new Text(widget.data['month'], style: TextStyle(fontSize: 22.0)),
                       new Container(width: 8.0),
-                      new Text('2018',
+                      new Text(widget.data['year'].toString(),
                           style: TextStyle(
                               fontSize: 22.0, color: Colors.grey[400])),
                     ],
@@ -35,36 +55,36 @@ class _ChartState extends State<Chart> {
                     spacing: 8.0, // gap between adjacent chips
                     runSpacing: 4.0, // gap between lines
                     alignment: WrapAlignment.center,
-                    children: <Widget>[
+                    children: [
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
                             size: 18.0, color: Colors.cyan[100]),
-                        label: new Text('Mercator'),
+                        label: new Text(vendornames[0]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
                             size: 18.0, color: Colors.cyan[300]),
-                        label: new Text('InterSpar'),
+                        label: new Text(vendornames[1]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
                             size: 18.0, color: Colors.cyan[600]),
-                        label: new Text('Lidl'),
+                        label: new Text(vendornames[2]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
                             size: 18.0, color: Colors.teal[200]),
-                        label: new Text('Deichman'),
+                        label: new Text(vendornames[3]),
                       ),
                       new Chip(
                         backgroundColor: Colors.transparent,
                         avatar: new Icon(Icons.brightness_1,
                             size: 18.0, color: Colors.tealAccent[100]),
-                        label: new Text('Other'),
+                        label: new Text(vendornames[4]),
                       )
                     ],
                   )
@@ -73,7 +93,7 @@ class _ChartState extends State<Chart> {
             ),
             new AnimatedCircularChart(
                 size: const Size(300.0, 300.0),
-                initialChartData: data,
+                initialChartData: plotData,
                 chartType: CircularChartType.Radial,
                 edgeStyle: SegmentEdgeStyle.round,
                 percentageValues: false),
@@ -97,7 +117,7 @@ class _ChartState extends State<Chart> {
                   children: <Widget>[
                     new Container(height: 40.0),
                     new Hero(
-                        tag: 'tag',
+                        tag: 'tag:',
                         //TODO: tale tag mora bit za usak mesec drgacn
                         child: new Material(
                           color: Colors.transparent,
@@ -106,7 +126,12 @@ class _ChartState extends State<Chart> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
                               new Text(
-                                '3.54 ',
+
+                                new NumberFormat.currency(
+                                  locale: 'en',
+                                  symbol: ''
+                                ).format(widget.data['total']),
+
                                 // TODO: tole mora bit hero na novo stran
                                 style: new TextStyle(
                                     fontSize: 46.0,
@@ -142,16 +167,3 @@ class _ChartState extends State<Chart> {
     );
   }
 }
-
-List<CircularStackEntry> data = <CircularStackEntry>[
-  new CircularStackEntry(
-    <CircularSegmentEntry>[
-      new CircularSegmentEntry(500.0, Colors.cyan[100], rankKey: 'Q1'),
-      new CircularSegmentEntry(1000.0, Colors.cyan[300], rankKey: 'Q2'),
-      new CircularSegmentEntry(2000.0, Colors.cyan[600], rankKey: 'Q3'),
-      new CircularSegmentEntry(1000.0, Colors.teal[200], rankKey: 'Q4'),
-      new CircularSegmentEntry(1000.0, Colors.tealAccent[100], rankKey: 'Q4'),
-    ],
-    rankKey: 'Quarterly Profits',
-  ),
-];

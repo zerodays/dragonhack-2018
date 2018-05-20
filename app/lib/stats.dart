@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
+import 'api.dart';
 import 'chart.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class Stats extends StatefulWidget {
 
@@ -11,8 +9,26 @@ class Stats extends StatefulWidget {
 }
 
 class _StatsState extends State<Stats> {
+  List<Chart> charts;
+
+  @override
+  void initState() {
+    charts = [];
+    getCharts();
+    super.initState();
+  }
+
+  getCharts() async {
+    var c = await getStatics();
+    setState(() {
+      charts = c;      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+
     return new Scaffold(
         floatingActionButton: new Container(
           child: new Text(
@@ -22,12 +38,7 @@ class _StatsState extends State<Stats> {
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: new PageView(scrollDirection: Axis.horizontal, children: [
-          new Chart(),
-          new Chart(),
-          new Chart(),
-          new Chart(),
-        ])
+        body: new PageView(scrollDirection: Axis.horizontal, children: charts)
     );
   }
 }

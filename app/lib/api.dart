@@ -7,6 +7,7 @@ import 'package:async/async.dart';
 import 'receipt.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart';
+import 'chart.dart';
 
 const String serverIp = 'http://46.101.179.230:8080';
 
@@ -59,7 +60,6 @@ getRequest(Uri uri, {decodeJson: true}) async {
     return responseBody;
 }
 
-
 Future<List<Receipt>> getScannedReciepts() async {
   Map data = await getRequest(Uri.parse(serverIp + '/history'));  
   
@@ -71,3 +71,11 @@ Future<List<Receipt>> getScannedReciepts() async {
   return dd;
 }
 
+Future<List<Chart>> getStatics() async {
+  Map data = await getRequest(Uri.parse(serverIp + '/statistics'));
+
+  List<Map<String, dynamic>> months = data['statistics'].cast<Map<String, dynamic>>();
+  return months.map(
+    (Map map) => new Chart(map)
+  ).toList();
+}
