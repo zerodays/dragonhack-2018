@@ -7,6 +7,7 @@ import json
 import time
 from PIL import Image
 import datetime
+from collections import defaultdict
 
 app = Flask(__name__)
 receipts_file = "receipts.txt"
@@ -86,7 +87,7 @@ def history():
     with open(receipts_file, 'r') as f:
         data = json.loads(f.read())
 
-    data['receipts'] = data['receipts'][-30:]
+    data['receipts'] = data['receipts'][:30]
 
     return json.dumps(data)
 
@@ -118,16 +119,13 @@ def statistics():
 
             stats[(date.year, date.month)] = {
                 'total': 0.0,
-                'vendors': vendors_dict,
+                'vendors': defaultdict(int),
                 'weekdays': weekdays_dict,
             }
 
         stats[(date.year, date.month)]['total'] += d['price']
-        if d['vendor'] in vendors:
-            stats[(date.year, date.month)]['vendors'][d['vendor']] += d['price']
-        else:
-            stats[(date.year, date.month)]['vendors']['Others'] += d['price']
         stats[(date.year, date.month)]['weekdays'][str(date.weekday())] += d['price']
+        stats[(date.year, date.month)]['vendors'][d['vendor']] += d['price']
 
         keys = list(stats.keys())
         keys.sort(reverse=True)
@@ -143,11 +141,19 @@ def statistics():
             })
 
         for r in res:
-            for key in r['vendors'].keys():
-                r['vendors'][key] = round(r['vendors'][key], 2)
+            organized_vendors = {}
+            for index, key in enumerate(sorted(r['vendors'].keys(), key=lambda x: r['vendors'][x], reverse=True)):
+                if index < 4:
+                    organized_vendors[key] = round(r['vendors'][key], 2)
+                else:
+                    if 'Others' not in organized_vendors:
+                        organized_vendors['Others'] = 0.0
+                    organized_vendors['Others'] += r['vendors'][key]
             for key in r['weekdays'].keys():
                 r['weekdays'][key] = round(r['weekdays'][key], 2)
-
+            for key in organized_vendors.keys():
+                organized_vendors[key] = round(organized_vendors[key], 2)
+            r['vendors'] = organized_vendors
 
     return json.dumps({'statistics': res})
 
