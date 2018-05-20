@@ -134,7 +134,7 @@ class _ChartState extends State<Chart> {
 
                                 // TODO: tole mora bit hero na novo stran
                                 style: new TextStyle(
-                                    fontSize: 46.0,
+                                    fontSize: 44.0,
                                     fontWeight: FontWeight.normal),
                               ),
                               new Container(
