@@ -9,7 +9,6 @@ def get_price_from_text(dictionary):
     :param dictionary: dictionary returned from google api
     :return: price as float
     """
-    print(data)
     data = dictionary['responses'][0]['textAnnotations']
 
     # Get main poly positions
