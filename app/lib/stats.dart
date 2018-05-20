@@ -3,11 +3,13 @@ import 'api.dart';
 import 'chart.dart';
 
 class Stats extends StatefulWidget {
+  Stats({Key key}) : super(key: key);
+
   @override
-  _StatsState createState() => new _StatsState();
+  StatsState createState() => new StatsState();
 }
 
-class _StatsState extends State<Stats> {
+class StatsState extends State<Stats> {
   List<Chart> charts;
 
   @override

@@ -8,6 +8,7 @@ import 'receipt.dart';
 import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'chart.dart';
+import 'global.dart';
 
 const String serverIp = 'http://46.101.179.230:8080';
 
@@ -51,8 +52,10 @@ Future<Null> uploadImage(String fileName) async {
   var response = await request.send();
 
   response.stream.transform(utf8.decoder).listen((value) {
-    print(value);
+    print('Request completed');
   });
+
+  reload();
 }
 
 getRequest(Uri uri, {decodeJson: true}) async {

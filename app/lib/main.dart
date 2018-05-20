@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'camera_view.dart';
 import 'stats.dart';
 import 'history.dart';
+import 'global.dart';
 
 Future<Null> main() async {
   try {
@@ -44,8 +45,8 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
       ),
       body: new PageView(scrollDirection: Axis.vertical, children: [
-        new Stats(),
-        new History(),
+        new Stats(key: statsKey),
+        new History(key: historyKey),
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: new Container(

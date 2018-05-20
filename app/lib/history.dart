@@ -4,11 +4,13 @@ import 'receipt.dart';
 import 'api.dart';
 
 class History extends StatefulWidget {
+  History({Key key}): super(key: key);
+
   @override
-  _HistoryState createState() => new _HistoryState();
+  HistoryState createState() => new HistoryState();
 }
 
-class _HistoryState extends State<History> {
+class HistoryState extends State<History> {
   List<Receipt> receipts;
 
   @override
