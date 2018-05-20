@@ -23,8 +23,14 @@ Future<Null> uploadImage(String fileName) async {
     loc = null;
   }
 
-  String lat = loc["latitude"].toString() ?? 46.050163.toString();
-  String lon = loc["longitude"].toString() ?? 14.468868.toString();
+  String lat, lon;
+  if (loc == null) {
+    lat =  46.050163.toString();
+    lon = 14.468868.toString();
+  } else {
+    lat = loc["latitude"].toString() ?? 46.050163.toString();
+    lon = loc["longitude"].toString() ?? 14.468868.toString();
+  }
 
   File imageFile = new File(fileName);
 

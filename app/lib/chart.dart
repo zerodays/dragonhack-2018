@@ -4,7 +4,7 @@ import 'details.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatefulWidget {
-  Map<String, dynamic> data;
+  final Map<String, dynamic> data;
 
   Chart(this.data);
 
