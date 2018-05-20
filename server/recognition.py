@@ -145,7 +145,6 @@ def get_vendor_name_from_text(dictionary):
     """
 
     def is_close(data, possible_strings, diff):
-        print(data)
         """
         Uses difflib to check if any of the stringsis close enough to any of the predetermined vendors
         """
