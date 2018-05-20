@@ -45,7 +45,7 @@ class _IndicatorState extends State<CircularInidicator> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Image.asset('assets/cloud_load.gif'),
-                new Text('Processing in the cloud ...', textAlign: TextAlign.center, style: new TextStyle(inherit: true, fontSize: 18.0, color: Colors.grey[800], fontWeight: FontWeight.normal))
+                new Text('Processing in the cloud ...', textAlign: TextAlign.center, style: new TextStyle(inherit: false, fontSize: 18.0, color: Colors.grey[800], fontWeight: FontWeight.normal))
               ],
             )
           )
