@@ -3,7 +3,6 @@ import 'api.dart';
 import 'chart.dart';
 
 class Stats extends StatefulWidget {
-
   @override
   _StatsState createState() => new _StatsState();
 }
@@ -21,14 +20,12 @@ class _StatsState extends State<Stats> {
   getCharts() async {
     var c = await getStatics();
     setState(() {
-      charts = c;      
+      charts = c;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return new Scaffold(
         floatingActionButton: new Container(
           child: new Text(
@@ -38,7 +35,7 @@ class _StatsState extends State<Stats> {
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: new PageView(scrollDirection: Axis.horizontal, children: charts)
-    );
+        body: new PageView(
+            reverse: true, scrollDirection: Axis.horizontal, children: charts));
   }
 }
