@@ -12,10 +12,11 @@ List<CameraDescription> cameras;
 
 class CameraView extends StatefulWidget {
   @override
- createState() => new _CameraViewState();
+  createState() => new _CameraViewState();
 }
 
-void logError(String code, String message) => print('Error: $code\nError Message: $message');
+void logError(String code, String message) =>
+    print('Error: $code\nError Message: $message');
 
 class _CameraViewState extends State<CameraView> {
   CameraController controller;
@@ -42,18 +43,17 @@ class _CameraViewState extends State<CameraView> {
         children: <Widget>[
           // crop camera previewr
           new OverflowBox(
-            maxWidth: double.infinity,
-            alignment: Alignment.center,
-            child: new FractionallySizedBox(
+              maxWidth: double.infinity,
               alignment: Alignment.center,
-              child: cameraPreview(),
-              heightFactor: 1.0,
-            )
-          ),
+              child: new FractionallySizedBox(
+                alignment: Alignment.center,
+                child: cameraPreview(),
+                heightFactor: 1.0,
+              )),
 
           // take picture
           new Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(16.0),
             child: captureButton(context),
           )
         ],
@@ -96,16 +96,19 @@ class _CameraViewState extends State<CameraView> {
     }
   }
 
-  Widget captureButton(BuildContext context) => new IconButton(
-    icon: const Icon(Icons.camera),
-    iconSize: 48.0,
-    color: Theme.of(context).accentColor,
-    onPressed: controller != null &&
-            controller.value.isInitialized &&
-            !controller.value.isRecordingVideo
-        ? () => onTakePictureButtonPressed(context)
-        : null,
-  );
+  Widget captureButton(BuildContext context) => new FlatButton(
+      shape: new RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(35.0)),
+      padding: new EdgeInsets.all(0.0),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onPressed: controller != null &&
+              controller.value.isInitialized &&
+              !controller.value.isRecordingVideo
+          ? () => onTakePictureButtonPressed(context)
+          : null,
+      child: new Image.asset('assets/camera.png', height: 70.0, width: 70.0));
+//  );
 
   String timestamp() => new DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -119,12 +122,11 @@ class _CameraViewState extends State<CameraView> {
       if (mounted) {
         Navigator.push(
           context,
-          new MaterialPageRoute(builder: (context) => new CircularInidicator(
-            () async {
-              await uploadImage(filePath);
-              Navigator.pop(context);
-            }
-          )),
+          new MaterialPageRoute(
+              builder: (context) => new CircularInidicator(() async {
+                    await uploadImage(filePath);
+                    Navigator.pop(context);
+                  })),
         );
       }
     });
@@ -154,4 +156,3 @@ class _CameraViewState extends State<CameraView> {
     return filePath;
   }
 }
-
