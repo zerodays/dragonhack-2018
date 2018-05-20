@@ -129,8 +129,8 @@ def get_price_from_text(dictionary):
 
     # Calculate final score
     for d in numbers:
-        d['score'] = d['score_x'] + d['score_y'] +  d['score_eur_x'] + d['score_eur_y'] + d['score_height'] + d['score_price'] + d['score_occurances']
-
+        d['score'] = d['score_x'] + d['score_y'] + d['score_eur_x'] + d['score_eur_y'] + d['score_height'] + d[
+            'score_price'] + d['score_occurances']
 
     numbers.sort(key=lambda x: x['score'], reverse=True)
 
@@ -150,15 +150,18 @@ def get_vendor_name_from_text(dictionary):
         """
         data1_possible_vendors = []
         temp_possible_strings = [l for l in possible_strings]
-        possible_strings += [j + " d.o.o." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
-        possible_strings += [j + " d.d." for j in temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        possible_strings += [j + " d.o.o." for j in
+                             temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
+        possible_strings += [j + " d.d." for j in
+                             temp_possible_strings]  # Add 'd.o.o.' to company names to check the possibility
         for j in data:
             for i in j.split(" "):  # Checks the data if it contains something close enough to any of the vendor names
                 i = i.lower()
                 possibilities = difflib.get_close_matches(i, possible_strings, cutoff=diff)
                 if possibilities:
                     data1_possible_vendors += possibilities
-        return list(set(w.rstrip(" d.o.o.").rstrip("d.o.o.").rstrip(" d.d.").rstrip("d.d.") for w in data1_possible_vendors))
+        return list(
+            set(w.rstrip(" d.o.o.").rstrip("d.o.o.").rstrip(" d.d.").rstrip("d.d.") for w in data1_possible_vendors))
 
     data = dictionary['responses'][0]['textAnnotations']
     receipt_text = data[0]['description'].split("\n")  # Get the actual receipt text
@@ -183,9 +186,6 @@ def get_vendor_name_from_text(dictionary):
                 out = list(set(is_close(receipt_text[:20], vendors, 1)))[0]  # Return the first found vendor
     if not out:
         out = receipt_text[0]
-        if 'hofer' in out:
-            out = 'hofer'
-
     else:
         if "," in receipt_text[0]:
             out = receipt_text[0].split(",")[0]
@@ -199,6 +199,8 @@ def get_vendor_name_from_text(dictionary):
         out = check_again[0]
     else:
         pass
+    if 'hofer' in out:
+        out = 'hofer'
     return out.capitalize()
 
 
