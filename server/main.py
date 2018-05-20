@@ -20,7 +20,7 @@ def recognize():
     filename = f'images/{upload_id}.jpg'
     request.files['file'].save(filename)
     picture = Image.open(filename)
-    if picture.size[0] > picture.size[1]
+    if picture.size[0] > picture.size[1]:
         picture.rotate(-90).save(filename)
 
     image = image_helpers.image_to_base64(filename)
