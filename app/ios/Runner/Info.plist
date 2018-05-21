@@ -45,5 +45,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    
+    <key>NSCameraUsageDescription</key>
+    <string>Camera is used to take pictures of receipts.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Microfone is needed for beta reasons.</string>
 </dict>
 </plist>

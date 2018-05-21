@@ -40,6 +40,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: mainScaffoldKey,
       appBar: new AppBar(
         title: new Text('Receipts'),
         centerTitle: true,

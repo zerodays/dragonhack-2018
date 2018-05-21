@@ -33,7 +33,7 @@ class HistoryState extends State<History> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: new Container(
           child: new Text(
-            'Pull down for stats.',
+            'Pull down for stats',
             style: new TextStyle(color: Colors.grey[500]),
           ),
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),

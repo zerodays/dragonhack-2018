@@ -13,22 +13,22 @@ class BarChart extends StatelessWidget {
 
   BarChart(this.list, {this.animate: true});
 
-
   @override
   Widget build(BuildContext context) {
-    return new charts.BarChart(
-      getGraphs(list),
-      animate: animate,
+    return new charts.BarChart(getGraphs(list),
+        animate: animate,
 
-      /// Customize the primary measure axis using a small tick renderer.
-      /// Note: use String instead of num for ordinal domain axis
-      /// (typically bar charts).
-      primaryMeasureAxis: new charts.NumericAxisSpec(
-          renderSpec: new charts.SmallTickRendererSpec(
-            // Tick and Label styling here.
-          )),
-      secondaryMeasureAxis: null
-    );
+        /// Customize the primary measure axis using a small tick renderer.
+        /// Note: use String instead of num for ordinal domain axis
+        /// (typically bar charts).
+//      primaryMeasureAxis: new charts.NumericAxisSpec(
+//          renderSpec: new charts.SmallTickRendererSpec(
+//            lineStyle: new charts.LineStyleSpec(color: charts.Color.transparent)
+//            // Tick and Label styling here.
+//          )),
+        primaryMeasureAxis:
+            new charts.NumericAxisSpec(renderSpec: new charts.NoneRenderSpec()),
+        secondaryMeasureAxis: null);
   }
 
   /// Create series list with single series
@@ -46,6 +46,10 @@ class BarChart extends StatelessWidget {
     return [
       new charts.Series<OrdinalSales, String>(
         id: 'Chart id',
+        colorFn: (_, __) {
+          return new charts.Color(
+              r: 38, g: 198, b: 218, a: 120);
+        },
         domainFn: (OrdinalSales sales, _) => sales.day,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: globalSalesData,

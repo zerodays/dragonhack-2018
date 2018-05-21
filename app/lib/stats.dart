@@ -31,7 +31,7 @@ class StatsState extends State<Stats> {
     return new Scaffold(
         floatingActionButton: new Container(
           child: new Text(
-            'Swipe up for scan history.',
+            'Swipe up for scan history',
             style: new TextStyle(color: Colors.grey[500]),
           ),
           padding: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
