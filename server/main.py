@@ -1,4 +1,3 @@
-import image_helpers
 import requests
 import uuid
 from flask import Flask, request, send_from_directory
@@ -8,24 +7,26 @@ import time
 from PIL import Image
 import datetime
 from collections import defaultdict
+import base64
+import os.path
 
 
 app = Flask(__name__)
-receipts_file = "receipts.txt"
+
+MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+RECEIPTS_FILE = "receipts.txt"
+API_KEY = ''
 
 
-@app.route('/recognize', methods=['POST'])
-def recognize():
-    upload_id = str(uuid.uuid4())
-    filename = f'images/{upload_id}.jpg'
-    request.files['file'].save(filename)
-    picture = Image.open(filename)
-    if picture.size[0] > picture.size[1]:
-        picture.rotate(-90).save(filename)
+def image_to_base64(image_path):
+    with open(image_path, 'rb') as f:
+        encoded = base64.b64encode(f.read())
+        encoded = encoded.decode('utf-8')
+    return str(encoded)
 
-    image = image_helpers.image_to_base64(filename)
 
-    url = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCFA9NO1gfGYOaZuGGzFiCtFLH7fTBj-PE'
+def ocr_image(image):
+    url = 'https://vision.googleapis.com/v1/images:annotate?key={}'.format(API_KEY)
     data = {
         'requests': [
             {
@@ -46,10 +47,26 @@ def recognize():
         ]
     }
     r = requests.post(url, json=data)
-    data = r.json()
+    return r.json()
+
+
+@app.route('/recognize', methods=['POST'])
+def recognize():
+    # Save image
+    upload_id = str(uuid.uuid4())
+    filename = f'images/{upload_id}.jpg'
+    request.files['file'].save(filename)
+
+    # Rotate image if needed
+    picture = Image.open(filename)
+    if picture.size[0] > picture.size[1]:
+        picture.rotate(-90).save(filename)
+
+    # Recognize text from image
+    image = image_to_base64(filename)
+    data = ocr_image(image)
 
     receipt_price = recognition.get_price_from_text(data)
-    '{:.2f}'.format(receipt_price)
     receipt_vendor = recognition.get_vendor_name_from_text(data)
 
     curr_time = time.time()
@@ -65,21 +82,20 @@ def recognize():
     }
 
     # Check if file exists - if not, make a template file
-    import os.path
-    if not os.path.exists(receipts_file) or os.path.getsize(receipts_file) == 0:
-        with open(receipts_file, "w") as init_f:
+    if not os.path.exists(RECEIPTS_FILE) or os.path.getsize(RECEIPTS_FILE) == 0:
+        with open(RECEIPTS_FILE, "w") as init_f:
             basic_json = {
                 'receipts': [],
             }
             json.dump(basic_json, init_f)
 
     # Read the old data from the file and modify the json
-    with open(receipts_file, "r") as f:
+    with open(RECEIPTS_FILE, "r") as f:
         existing_json = json.loads(f.read())
         existing_json['receipts'].append(json_data_raw)
 
     # Dump the new json into the file
-    with open(receipts_file, "w") as f:
+    with open(RECEIPTS_FILE, "w") as f:
         json.dump(existing_json, f)
 
     # Return the json data
@@ -88,7 +104,7 @@ def recognize():
 
 @app.route('/history')
 def history():
-    with open(receipts_file, 'r') as f:
+    with open(RECEIPTS_FILE, 'r') as f:
         data = json.loads(f.read())
 
     data['receipts'] = data['receipts'][-30:]
@@ -96,14 +112,10 @@ def history():
     return json.dumps(data, ensure_ascii=False)
 
 
-vendors = ["spar", "deichmann", "mercator", "lidl", "tuš", "hofer", "interspar", "eurospin", "sariko", "gda", "dijaški dom vič"]
-vendors = list(map(lambda x: x.capitalize(), vendors))
-
-months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 @app.route('/statistics')
 def statistics():
-    with open(receipts_file, 'r') as f:
+    with open(RECEIPTS_FILE, 'r') as f:
         data = json.loads(f.read())
 
     data = data['receipts']
@@ -112,11 +124,6 @@ def statistics():
     for d in data:
         date = datetime.date.fromtimestamp(int(d['time']))
         if (date.year, date.month) not in stats:
-            vendors_dict = dict()
-            for vendor in vendors:
-                vendors_dict[vendor] = 0.0
-            vendors_dict['Others'] = 0.0
-
             weekdays_dict = dict()
             for i in range(7):
                 weekdays_dict[str(i)] = 0.0
@@ -141,7 +148,7 @@ def statistics():
                 'vendors': stats[key]['vendors'],
                 'weekdays': stats[key]['weekdays'],
                 'year': key[0],
-                'month': months[key[1] - 1],
+                'month': MONTHS[key[1] - 1],
             })
 
         for r in res:
@@ -166,7 +173,7 @@ def statistics():
 def delete_upload():
     to_delete = str(request.args.get('id'))
     print(to_delete)
-    with open(receipts_file, 'r') as f:
+    with open(RECEIPTS_FILE, 'r') as f:
         data = json.loads(f.read())
 
     delete_index = None
@@ -176,7 +183,7 @@ def delete_upload():
             break
     data['receipts'].pop(delete_index)
 
-    with open(receipts_file, "w") as f:
+    with open(RECEIPTS_FILE, "w") as f:
         json.dump(data, f)
 
     return 'neki je podeletal'

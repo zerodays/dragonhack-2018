@@ -221,6 +221,6 @@ def get_vendor_name_from_text(dictionary):
 
 
 if __name__ == '__main__':
-    data = json.load(open('data3.txt'))
+    data = json.load(open('sample_data/data3.txt'))
     get_price_from_text(data)
     get_vendor_name_from_text(data)
