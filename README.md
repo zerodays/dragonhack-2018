@@ -3,7 +3,7 @@ Dragon hack 2018 project that scans receipts using ocr and displays you monthly 
 
 ## Server
 1. Move to server directory
-````
+```
 cd server
 ```
 
