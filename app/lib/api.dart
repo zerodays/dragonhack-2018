@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'chart.dart';
 import 'global.dart';
 
-const String serverIp = 'http://46.101.179.230:8080';
+const String serverIp = 'http://167.99.252.83:8080';
 
 var location = new Location();
 
