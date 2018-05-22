@@ -138,33 +138,33 @@ def statistics():
         stats[(date.year, date.month)]['weekdays'][str(date.weekday())] += d['price']
         stats[(date.year, date.month)]['vendors'][d['vendor']] += d['price']
 
-        keys = list(stats.keys())
-        keys.sort(reverse=True)
+    keys = list(stats.keys())
+    keys.sort(reverse=True)
 
-        res = []
-        for key in keys:
-            res.append({
-                'total': round(stats[key]['total'], 2),
-                'vendors': stats[key]['vendors'],
-                'weekdays': stats[key]['weekdays'],
-                'year': key[0],
-                'month': MONTHS[key[1] - 1],
-            })
+    res = []
+    for key in keys:
+        res.append({
+            'total': round(stats[key]['total'], 2),
+            'vendors': stats[key]['vendors'],
+            'weekdays': stats[key]['weekdays'],
+            'year': key[0],
+            'month': MONTHS[key[1] - 1],
+        })
 
-        for r in res:
-            organized_vendors = {}
-            for index, key in enumerate(sorted(r['vendors'].keys(), key=lambda x: r['vendors'][x], reverse=True)):
-                if index < 4:
-                    organized_vendors[key] = round(r['vendors'][key], 2)
-                else:
-                    if 'Others' not in organized_vendors:
-                        organized_vendors['Others'] = 0.0
-                    organized_vendors['Others'] += r['vendors'][key]
-            for key in r['weekdays'].keys():
-                r['weekdays'][key] = round(r['weekdays'][key], 2)
-            for key in organized_vendors.keys():
-                organized_vendors[key] = round(organized_vendors[key], 2)
-            r['vendors'] = organized_vendors
+    for r in res:
+        organized_vendors = {}
+        for index, key in enumerate(sorted(r['vendors'].keys(), key=lambda x: r['vendors'][x], reverse=True)):
+            if index < 4:
+                organized_vendors[key] = round(r['vendors'][key], 2)
+            else:
+                if 'Others' not in organized_vendors:
+                    organized_vendors['Others'] = 0.0
+                organized_vendors['Others'] += r['vendors'][key]
+        for key in r['weekdays'].keys():
+            r['weekdays'][key] = round(r['weekdays'][key], 2)
+        for key in organized_vendors.keys():
+            organized_vendors[key] = round(organized_vendors[key], 2)
+        r['vendors'] = organized_vendors
 
     return json.dumps({'statistics': res}, ensure_ascii=False)
 
