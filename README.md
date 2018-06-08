@@ -52,3 +52,9 @@ flutter packages get
 ```
 flutter run
 ```
+
+## App Screenshots
+
+![](screenshots/last_scanned.png)
+![](screenshots/stats.png)
+![](screenshots/stats2.png)
